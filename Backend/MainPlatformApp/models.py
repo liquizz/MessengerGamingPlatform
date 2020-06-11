@@ -5,9 +5,10 @@ from django.db import models
 
 class User(models.Model):
     userid = models.AutoField(db_column='UserId', primary_key=True)
-    username = models.TextField(db_column='UserName')
-    telegramid = models.TextField(db_column='TelegramId')
-    discordid = models.TextField(db_column='DiscordId')
+    username = models.CharField(db_column='UserName', max_length=20)
+    telegramid = models.CharField(db_column='TelegramId', max_length=20)
+    discordid = models.CharField(db_column='DiscordId', max_length=20)
+    # TODO посмотреть точную длину telegramid и discordid
 
 
 # class Session(models.Model):
