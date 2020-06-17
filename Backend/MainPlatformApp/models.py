@@ -4,10 +4,10 @@ from django.db import models
 
 
 class User(models.Model):
-    userid = models.AutoField(db_column='UserId', primary_key=True)
+    userid = models.AutoField(db_column='UserId', primary_key=True, unique=True)
     username = models.CharField(db_column='UserName', max_length=20)
-    telegramid = models.CharField(db_column='TelegramId', max_length=20)
-    discordid = models.CharField(db_column='DiscordId', max_length=20)
+    telegramid = models.CharField(db_column='TelegramId', max_length=20, unique=True)
+    discordid = models.CharField(db_column='DiscordId', max_length=20, unique=True)
     # TODO посмотреть точную длину telegramid и discordid
 
 
