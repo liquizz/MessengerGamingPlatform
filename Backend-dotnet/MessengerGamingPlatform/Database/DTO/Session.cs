@@ -5,8 +5,9 @@ using System.Threading.Tasks;
 
 namespace Database.DTO
 {
-    public class SessionStatus
+    public class Session
     {
-        public string Status { get; set; }
+        public int SessionMedievalBattleId { get; set; }
+        public int Status { get; set; }
     }
 }

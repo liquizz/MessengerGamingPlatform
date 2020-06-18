@@ -14,5 +14,10 @@ namespace Database.Models
         public string Telegram { get; set; }
         public string Discord { get; set; }
         public List<UsersSessionsMedievalBattle> usersSessionsMedievalBattles { get; set; }
+        //public User(string UserId, string Username, string Messanger)
+        //{
+        //    this.Username = Username;
+        //    this.Telegram = ;
+        //}
     }
 }

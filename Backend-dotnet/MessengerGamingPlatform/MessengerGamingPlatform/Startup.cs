@@ -28,6 +28,7 @@ namespace MessengerGamingPlatform
         {
             services.AddControllers();
             services.AddDbContext<DatabaseContext>(i => i.UseSqlServer(Configuration.GetConnectionString("server1"), b => b.MigrationsAssembly("Api")));
+            services.AddScoped<DatabaseContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

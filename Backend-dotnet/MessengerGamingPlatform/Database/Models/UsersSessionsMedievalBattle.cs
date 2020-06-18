@@ -8,6 +8,9 @@ namespace Database.Models
 {
     public class UsersSessionsMedievalBattle
     {
+
+        //Почитать про VirtualTable
+
         [Key]
         public int UsersSessionsMedievalBattleId { get; set; }
         public int UserId { get; set; }
