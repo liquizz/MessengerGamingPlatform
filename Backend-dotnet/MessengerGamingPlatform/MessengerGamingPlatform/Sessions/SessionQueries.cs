@@ -53,5 +53,19 @@ namespace Api.Sessions
 
             return session;
         }
+
+        public GetUsersSessionsMedievalBattle GetUsession(string UserId)
+        {
+            string sqlquery = $@"select * from UsersSessionsMedievalBattle where UserId = {UserId}";
+
+            var usession = new GetUsersSessionsMedievalBattle();
+
+            using (IDbConnection db = new SqlConnection(connectionString))
+            {
+                usession = db.Query<GetUsersSessionsMedievalBattle>(sqlquery).FirstOrDefault();
+            }
+
+            return usession;
+        }
     }
 }

@@ -30,7 +30,7 @@ namespace Api.Sessions
 
         public Session CreateSessionMedievalBattles(int UserId)
         {
-            throw new Exception("pidoras");
+            //throw new Exception("pidoras");
             var response = _repository.CreateSessionMedievalBattles(UserId);
             return GetSession(UserId);
         }

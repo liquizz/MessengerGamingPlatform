@@ -31,5 +31,21 @@ namespace Database.Repository
 
             return true;
         }
+
+        public bool DeleteSessionMedievalBattles(int SessionId, int UsessionId)
+        {
+            var session = _context.SessionMedievalBattles.Find(SessionId);
+            var Usession = _context.UsersSessionsMedievalBattle.Find(UsessionId);
+
+            if(session == null || Usession == null)
+            {
+                return false;
+            }
+
+            _context.SessionMedievalBattles.Remove(session);
+            _context.UsersSessionsMedievalBattle.Remove(Usession);
+            
+            return true;  
+        }
     }
 }

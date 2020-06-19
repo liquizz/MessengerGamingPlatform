@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Database.Models;
 using Database.DTO;
+using Api.Users;
 
 namespace Api.Controllers
 {
@@ -14,26 +15,43 @@ namespace Api.Controllers
     public class UsersController : ControllerBase
     {
         private readonly DatabaseContext _context;
+        private readonly UserService _service;
 
         public UsersController(DatabaseContext context)
         {
             context = _context;
+            _service = new UserService();
         }
 
         [HttpGet]
-        public ActionResult<User> GetUsers(int id)
+        public ActionResult<User> GetUser(int id)
         {
             
             return null;
         }
 
-        [HttpPost]
-        public ActionResult<StatusResponse> CreateUserTelegram(string Username, string TelegramId)
+        [HttpGet]
+        public ActionResult<Object> CreateTelegramUser(string Username, string TelegramId)
         {
-            
-            return null;
+            var response = _service.CreateUserByTelegramId(Username, TelegramId);
+
+            return response;
         }
-        
+
+        [HttpGet]
+        public ActionResult<CreateUser> CreateDiscordUser(string Username, string DiscordId)
+        {
+            var response = _service.CreateUserByDiscordId(Username, DiscordId);
+            return response;
+        }
+
+        [HttpGet]
+        public ActionResult<User> GetUserByUserId(int userid)
+        {
+            var response = _service.GetUserByUserId(userid);
+            return response;
+        }
+
         [HttpDelete]
         public ActionResult<StatusResponse> DeleteUser()
         {

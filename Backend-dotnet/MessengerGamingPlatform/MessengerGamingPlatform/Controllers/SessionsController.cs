@@ -31,9 +31,9 @@ namespace Api.Controllers
         }
 
         [HttpGet]
-        public Object CreateTelegramSession(int id)
+        public Object CreateSessionMedievalBattles(int userid)
         {
-            var resronse = _service.CreateSessionMedievalBattles(id);
+            var resronse = _service.CreateSessionMedievalBattles(userid);
             return resronse;
         }
 
