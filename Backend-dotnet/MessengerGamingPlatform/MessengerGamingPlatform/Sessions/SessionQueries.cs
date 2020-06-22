@@ -19,14 +19,13 @@ namespace Api.Sessions
         {
 
         }
-        public List<SessionParticipants> GetSessionParticipants()
+        public List<SessionParticipants> GetSessionParticipants(int SessionId)
         {
-            string sqlquery = @"select Users.Username, UsersSessionsMedievalBattle.SessionMedievalBattleId
+            string sqlquery = @$"select Users.Username, UsersSessionsMedievalBattle.SessionMedievalBattleId
             from dbo.SessionMedievalBattles
             full join UsersSessionsMedievalBattle on UsersSessionsMedievalBattle.SessionMedievalBattleId = SessionMedievalBattles.SessionMedievalBattleId
-            full
-            join Users on Users.UserId = UsersSessionsMedievalBattle.UserId
-            where SessionMedievalBattles.SessionMedievalBattleId = 1;";
+            full join Users on Users.UserId = UsersSessionsMedievalBattle.UserId
+            where SessionMedievalBattles.SessionMedievalBattleId = {SessionId};";
 
             var participants = new List<SessionParticipants>();
 
@@ -54,7 +53,7 @@ namespace Api.Sessions
             return session;
         }
 
-        public GetUsersSessionsMedievalBattle GetUsession(string UserId)
+        public GetUsersSessionsMedievalBattle GetUsession(int UserId)
         {
             string sqlquery = $@"select * from UsersSessionsMedievalBattle where UserId = {UserId}";
 
@@ -66,6 +65,21 @@ namespace Api.Sessions
             }
 
             return usession;
+        }
+
+        // Open sessions listing
+        public List<Session> GetSessionViaStatus()
+        {
+            string sqlquery = $@"select * from SessionMedievalBattles where Status = 1";
+
+            var session = new List<Session>();
+
+            using (IDbConnection db = new SqlConnection(connectionString))
+            {
+                session = db.Query<Session>(sqlquery).ToList();
+            }
+
+            return session;
         }
     }
 }

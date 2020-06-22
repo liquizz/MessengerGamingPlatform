@@ -47,5 +47,34 @@ namespace Database.Repository
             
             return true;  
         }
+
+        //Метод для создания подключения пользователя к сессии (лобби)
+        public bool CreateUsersSessionMedievalBattles(int UserId, int SessionId)
+        {
+            var Usession = new UsersSessionsMedievalBattle
+            {
+                UserId = UserId,
+                SessionMedievalBattleId = SessionId
+            };
+
+            _context.UsersSessionsMedievalBattle.Add(Usession);
+            _context.SaveChanges();
+
+            return true;
+        }
+
+        public bool ChangeSessionStatus(int SessionId)
+        {
+            var session = _context.SessionMedievalBattles.Find(SessionId);
+
+            if(session != null)
+            {
+                session.Status = 0;
+            }
+
+            _context.SaveChanges();
+
+            return true;
+        }
     }
 }

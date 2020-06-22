@@ -23,20 +23,31 @@ namespace Api.Controllers
             _service = new SessionService();
         }
 
+        // Сделать метод для получения id сессии
         [HttpGet]
         public Object GetSessionParticipants()
         {
-            var result = _service.GetSessionsParticipants();
+            var result = _service.GetSessionsParticipants(1);
             return result;
         }
 
         [HttpGet]
-        public Object CreateSessionMedievalBattles(int userid)
+        public Object CreateSessionMedievalBattle(int userid)
         {
             var resronse = _service.CreateSessionMedievalBattles(userid);
             return resronse;
         }
 
+
+        [HttpGet]
+        public Object JoinSession(int UserId)
+        {
+
+
+            return null;
+        }
+
+        // Дописать
         public ActionResult<StatusResponse> DeleteSession()
         {
             return null;
