@@ -1,13 +1,12 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
-
+<Project Sdk="Microsoft.NET.Sdk.Web" ToolsVersion="Current">
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <FileUpgradeFlags>40</FileUpgradeFlags>
+    <UpgradeBackupLocation>C:\Users\yukkop\Documents\GitHub\MessengerGamingPlatform\Backend-dotnet\MessengerGamingPlatform\Backup\MedievalBattle\</UpgradeBackupLocation>
+    <OldToolsVersion>2.0</OldToolsVersion>
   </PropertyGroup>
-
   <ItemGroup>
     <Folder Include="Models\" />
     <Folder Include="MedievalBattleLogic\" />
   </ItemGroup>
-
-
 </Project>
