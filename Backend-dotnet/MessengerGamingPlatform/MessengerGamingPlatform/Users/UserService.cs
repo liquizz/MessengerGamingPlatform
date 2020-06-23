@@ -68,5 +68,12 @@ namespace Api.Users
             var result = _query.GetUserByUserId(UserId);
             return result;
         }
+
+        public Object DeleteUser(int UserId)
+        {
+
+
+            return null;
+        }
     }
 }

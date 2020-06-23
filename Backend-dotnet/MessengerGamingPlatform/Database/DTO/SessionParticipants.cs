@@ -9,5 +9,6 @@ namespace Database.DTO
     {
         public string Username { get; set; }
         public int SessionMedievalBattleId { get; set; }
+        public int UsersSessionsMedievalBattleId { get; set; }
     }
 }
