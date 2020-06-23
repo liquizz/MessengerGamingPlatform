@@ -95,16 +95,16 @@ namespace Api.Sessions
 
             if (participants.Count == 1)
             {
-                // remove lobby
+                // remove entire session
                 _repository.DeleteSessionMedievalBattles(sessionid, usessionid);
+                return true;
             }
             else
             {
-                // remove session
-                // дописать
+                // remove lobby
+                _repository.DeleteUsersSessionMedievalBattles(UserId);
+                return true;
             }
-
-            return false;
         }
     }
 }

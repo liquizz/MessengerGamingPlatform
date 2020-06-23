@@ -24,10 +24,17 @@ namespace Api.Controllers
         }
 
         [HttpGet]
-        public ActionResult<User> GetUser(int id)
+        public Object GetUserByTelegram(string telegramid)
         {
-            
-            return null;
+            var result = _service.GetUserByTelegramId(telegramid);
+            return result;
+        }
+
+        [HttpGet]
+        public Object GetUserByDiscord(string discordid)
+        {
+            var result = _service.GetUserByDiscordId(discordid);
+            return result;
         }
 
         [HttpGet]
@@ -45,6 +52,7 @@ namespace Api.Controllers
             return response;
         }
 
+        //Добавить метод объединения двух пользователей.
         [HttpGet]
         public ActionResult<User> GetUserByUserId(int userid)
         {
@@ -55,6 +63,7 @@ namespace Api.Controllers
         [HttpDelete]
         public ActionResult<StatusResponse> DeleteUser()
         {
+
             return null;
         }
     }

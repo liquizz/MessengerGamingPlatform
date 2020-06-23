@@ -42,15 +42,17 @@ namespace Api.Controllers
         [HttpGet]
         public Object JoinSession(int UserId)
         {
+            var response = _service.JoinSession(UserId);
 
-
-            return null;
+            return response;
         }
 
         // Дописать
-        public ActionResult<StatusResponse> DeleteSession()
+        [HttpGet]
+        public Object LeaveSession(int UserId)
         {
-            return null;
+            var response = _service.LeaveSession(UserId);
+            return response;
         }
     }
 }
