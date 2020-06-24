@@ -9,5 +9,9 @@
     <Folder Include="MedievalBattleLogic\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Database\Database.csproj" />
+  </ItemGroup>
+
 
 </Project>

@@ -37,8 +37,15 @@ namespace Api.Users
 
         public CreateUser GetUserByTelegramId(string telegamid)
         {
-            var result = _query.GetUserIdByTelegram(telegamid);
-            return result;
+            if (_query.GetUserIdByTelegram(telegamid) == null)
+            {
+                return null;
+            }
+            else
+            {
+                var result = _query.GetUserIdByTelegram(telegamid);
+                return result;
+            }          
         }
 
         //Логика создания пользователя по DiscordId
@@ -58,21 +65,33 @@ namespace Api.Users
 
         public CreateUser GetUserByDiscordId(string discordid)
         {
-            var result = _query.GetUserIdByDiscord(discordid);
-            return result;
+            if(_query.GetUserIdByDiscord(discordid) == null)
+            {
+                return null;
+            }
+            else
+            {
+                var result = _query.GetUserIdByDiscord(discordid);
+                return result;
+            }
         }
 
         //Получаем информацию о пользователе с UserId (не безопасно...)
         public User GetUserByUserId(int UserId)
         {
-            var result = _query.GetUserByUserId(UserId);
-            return result;
+            if(_query.GetUserByUserId(UserId) == null)
+            {
+                return null;
+            }
+            else
+            {
+                var result = _query.GetUserByUserId(UserId);
+                return result;
+            }
         }
 
         public Object DeleteUser(int UserId)
         {
-
-
             return null;
         }
     }
