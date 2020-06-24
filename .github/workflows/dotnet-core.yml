@@ -17,9 +17,12 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.101
-    - name: Install dependencies
-      run: dotnet restore
+    - name: Install dependencies (Api)
+      run: dotnet restore 
+      working-directory: ./Backend-dotnet/MessangerGamingPlatform/
     - name: Build
       run: dotnet build --configuration Release --no-restore
+      working-directory: ./Backend-dotnet/MessangerGamingPlatform/
     - name: Test
       run: dotnet test --no-restore --verbosity normal
+      working-directory: ./Backend-dotnet/MessangerGamingPlatform/
