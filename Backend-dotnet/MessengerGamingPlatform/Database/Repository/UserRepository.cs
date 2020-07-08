@@ -40,5 +40,22 @@ namespace Database.Repository
 
             return true;
         }
+
+        public bool DeleteUser(int UserId)
+        {
+            try
+            {
+                var user = _context.Users.Find(UserId);
+
+                _context.Remove(user);
+                _context.SaveChanges();
+
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
     }
 }
