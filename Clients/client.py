@@ -39,9 +39,13 @@ def send_text(message):
         bot.send_message(message.chat.id, message.from_user.id)
     elif message.text.lower() == 'поиск сессии' or  message.text.lower() == 'поиск сесии':
         bot.send_message(message.chat.id, 'Вот ты конченый')
-    response = requests.get('http://localhost:51198/api/Users/GetUserByUserId?userid=2')
     print(message.from_user.id)
-    response = requests.get('http://localhost:51198/api/Sessions/CreateSessionMedievalBattle?', str(message.from_user.id))
+    response = requests.get('http://localhost:51198/api/Users/CreateTelegramUser?Username=name&TelegramId=' + str(message.from_user.id))
+    print(str(message.from_user.id))
+    print(response)
+    print(response.content)
+    response = requests.get('http://localhost:51198/api/Users/GetUserByTelegram?telegramid=' + str(message.from_user.id))
+    print(response)
     print(response.content)
 
 
