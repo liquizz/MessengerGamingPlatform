@@ -15,8 +15,11 @@ namespace Fighter.src
 
     abstract class AbstractField
     {
+        protected GameController mapController;
+
         // Характеристики Поля:
-        protected byte position; // 0 - 7
+        protected int teamId;
+        protected int position; // 0 - 7
         protected int size = 100; //Размер поля
 
         // Характеристики Юнитов:
@@ -34,7 +37,9 @@ namespace Fighter.src
         protected Unit[] units;
         protected List<AbstractField> enemy;
 
-        protected abstract List<int> SelectedAlgorithm(); //Метод возвращающий доступные для атаки вражеские ячейки (точнее их id), нужен для того что бы бот создавал клавиатуру из этих значений
+        public abstract List<int> SelectedAlgorithm(); //Метод возвращающий доступные для атаки вражеские ячейки (точнее их id), нужен для того что бы бот создавал клавиатуру из этих значений
+        public abstract void Atack(int atackedFieldId);
+
         public void FillField(int count)
         { //Заполняет поле юнитами в зависимости от Размера поля (size), Габоритов юнитов (dimensions), и их количества (count)
             this.liveCount = count;
@@ -75,15 +80,19 @@ namespace Fighter.src
             Random rnd = new Random();
             for (int i = 0; i < shellCount; i++) {
                 int unitPos =rnd.Next(1, size / dimensions); //Рандомиться ячейка в которую попадет стрела (если 0, то стрела не попала не куда)
-                if (units[unitPos] != null) {
-                    units[unitPos].DealingDamage(shellDamage);
+                if (unitPos < count)
+                {
+                    if (units[unitPos] != null)
+                    {
+                        units[unitPos].DealingDamage(shellDamage);
+                    }
                 }
             }
         }
 
-        void DirectExposure(AbstractField atackDilers) {
+        public void DirectExposure(AbstractField atackDilers) {
             Random rnd = new Random();
-            for (int i = 0; i < size / 5; i++)
+            for (int i = 0; i < (((size / 5) > liveCount) ? liveCount : (size / 5)) /*береться 20% юнитов от макс кол-ва, если юнитов меньеше беруться все*/; i++)
             {
                 int a = rnd.Next(1, 4);
                 if (a == 1)
@@ -102,8 +111,11 @@ namespace Fighter.src
         public void UnitDeath (int id)
         {
             units[id] = null;
-            liveCount--;
             deadCount++;
+            if(--liveCount == 0)
+            {
+                mapController.RemoveField(teamId, position);
+            }
         }
 
         public int GetCost ()
@@ -118,9 +130,14 @@ namespace Fighter.src
     }
 
     class Hybrid : AbstractField {
-        override protected List<int> SelectedAlgorithm() {
+        override public List<int> SelectedAlgorithm() {
             List<int> var = null;
             return var;
+        }
+
+        public override void Atack(int atackedFieldId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

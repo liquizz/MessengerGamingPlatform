@@ -7,17 +7,17 @@ using System.Text;
 
 namespace Fighter.src
 {
-    class Builder
+    class GameController
     {
-        List<AbstractField>[] Teams = new List<AbstractField>[2];
-        int[] coins = new int[2];
+        public List<AbstractField>[] Teams = new List<AbstractField>[2];
+        int[] coins = new int[2] { 2500, 2500 };
+        int[] availableFieldsCount = new int[2] {8, 8};
+        bool gameAvailable = true;
+        int defeatTeam;
         int turn = 0;
 
-        public Builder()
+        public GameController()
         {
-            coins[0] = 2500;
-            coins[1] = 2500;
-
             for (int j = 0; j < 2; j++)
             {
                 Teams[j] = new List<AbstractField>();
@@ -31,13 +31,6 @@ namespace Fighter.src
 
         public bool SetField(int team, int count, int classId, int fieldId, int unitCost) //Заполняет ячейку операясь на данные возвращенные ботом
         {
-            int enemyTeam;
-            if (team == 1) {
-                enemyTeam = 0;
-            }
-            else {
-                enemyTeam = 1;
-            }
 
             switch (classId)
             {
@@ -50,7 +43,18 @@ namespace Fighter.src
                     else
                     {
                         coins[team] -= unitCost * count;
-                        Teams[team][fieldId] = new Archer(count, Teams[enemyTeam]);
+                        Teams[team][fieldId] = new Archer(count, team, fieldId, Teams[(team == 1) ? 0 : 1 /*это вражеская команда*/], this);
+                        return true;
+                    }
+                case 1:
+                    if (coins[team] < unitCost * count)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        coins[team] -= unitCost * count;
+                        Teams[team][fieldId] = new Warrior(count, team, fieldId, Teams[(team == 1) ? 0 : 1 /*это вражеская команда*/], this);
                         return true;
                     }
 
@@ -123,5 +127,24 @@ namespace Fighter.src
             turn++;
         }
 
+        public void RemoveField(int team, int position)
+        {
+            Teams[team][position] = null;
+            if(--availableFieldsCount[team] == 0)
+            {
+                gameAvailable = false;
+                defeatTeam = team;
+            }
+        }
+
+        public bool GetGameAvailable()
+        {
+            return gameAvailable;
+        }
+
+        public int GetDefeatTeam()
+        {
+            return defeatTeam;
+        }
     }
 }
