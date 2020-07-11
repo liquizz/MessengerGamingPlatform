@@ -7,11 +7,12 @@ namespace Fighter
 {
     class Program
     {
-        static int[] unitCosts = new int[1]; //стоймость ячейка в масиве соответствует id типа юнита
+        static int[] unitCosts = new int[2]; //стоймость ячейка в масиве соответствует id типа юнита
 
         static void Main(string[] args)
         {
             unitCosts[0] = 10; //это наверно должно хранитсья в базе и я хуй его как доступ получать
+            unitCosts[1] = 20;
             BotSimulyator();
         }
 
@@ -19,13 +20,16 @@ namespace Fighter
         //Типы/id юнитов - Archer/0 
         static void BotSimulyator() //Херовенькая имитация работы бота для отладки
         {
-            Builder kek = new Builder();
+            GameController kek = new GameController();
+
+            //Этап выбора юнитов:
+
             Console.WriteLine("use auto filling? (y/n)");
             if (Console.ReadLine() == "y")
             {
-                mapAutoFilling(kek);
+                mapAutoFilling(kek); //Автозаполнение
             }
-            else
+            else //Ручное заполнение (оч долго)
             {
 
                 int _team, fieldId, unitTypeId, unitCount;
@@ -68,60 +72,84 @@ namespace Fighter
                 }
             }
 
-            bool a = true;
+            //Этап сражения:
 
-            int team, field;
-
-            if (a) //чисто по преколу **требует переработки** (нет я серьезно, нужно исправить)
+            while (kek.GetGameAvailable())
             {
-                team = Convert.ToInt32(a);
-                Console.WriteLine("team 1: ");
-                a = !a;
-            }
-            else
-            {
-                team = Convert.ToInt32(a);
-                Console.WriteLine("team 2: ");
-                a = !a;
-            }
+                bool a = true;
 
-            List<int> availableFields = kek.GetAvailableField(team);
-            Console.Write("Available field: ");
-            for(int j = 0; j < availableFields.Count; j++)
-                    {
-                if (j != 0)
+                int team, field, choise;
+
+                if (a) //чисто по преколу **требует переработки** (нет я серьезно, нужно исправить)
                 {
-                    Console.Write(",");
+                    team = Convert.ToInt32(a);
+                    Console.WriteLine("team 1: ");
+                    a = !a;
                 }
-                Console.Write(availableFields[j]);
+                else
+                {
+                    team = Convert.ToInt32(a);
+                    Console.WriteLine("team 2: ");
+                    a = !a;
+                }
+
+                List<int> availableFields = kek.GetAvailableField(team);
+                Console.Write("Available field: ");
+                for (int j = 0; j < availableFields.Count; j++)
+                {
+                    if (j != 0)
+                    {
+                        Console.Write(",");
+                    }
+                    Console.Write(availableFields[j]);
+                }
+                Console.Write("\n");
+
+                Console.WriteLine("Choose field: ");
+                field = Convert.ToInt32(Console.ReadLine());
+
+
+                Console.Write("Available actions (a): ");
+                string action = Console.ReadLine();
+                switch (action)
+                {
+                    case "a":
+                        List<int> selectedField = kek.Teams[team][field].SelectedAlgorithm();
+                        Console.Write("Choose field to atack: ");
+                        for (int j = 0; j < selectedField.Count; j++)
+                        {
+                            if (j != 0)
+                            {
+                                Console.Write(",");
+                            }
+                            Console.Write(selectedField[j]);
+                        }
+                        Console.Write("\n");
+
+                        choise = Convert.ToInt32(Console.ReadLine());
+                        kek.Teams[team][field].Atack(choise);
+
+                        Console.WriteLine("Your field status: " + kek.Teams[team][field].GetUnitsState());
+                        Console.WriteLine("Enemy field status: " + kek.Teams[(team == 1) ? 0 : 1][choise].GetUnitsState());
+                        break;
+                }
+
             }
-            Console.Write("\n");
-            Console.WriteLine("Choose field: ");
-            field = Convert.ToInt32(Console.ReadLine());
 
-
-            Console.Write("Available actions (a): ");
-            string action = Console.ReadLine();
-            switch (action)
-            {
-                case "action":
-
-                    break;
-            }
-
+            Console.WriteLine("Defeat team " + (kek.GetDefeatTeam() + 1));  
         }
 
-        static void mapAutoFilling(Builder kek) //для быстрой отладки
+        static void mapAutoFilling(GameController kek) //для быстрой отладки
         {
             for (int team = 0; team < 2; team++) {
                 for (int fieldId = 0; fieldId < 8; fieldId++) {
                     if (fieldId != 4 && fieldId != 5)
                     {
-                        kek.SetField(team, 10, fieldId, 1, unitCosts[1]);
+                        kek.SetField(team, 10, 1, fieldId, unitCosts[1]);
                     }
                     else
                     {
-                        kek.SetField(team, 10, fieldId, 0, unitCosts[0]);
+                        kek.SetField(team, 10, 0, fieldId, unitCosts[0]);
                     }
                 } 
             }

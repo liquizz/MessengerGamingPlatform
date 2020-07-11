@@ -6,10 +6,15 @@ namespace Fighter.src
 {
     class Flank : AbstractField
     {
-        override protected List<int> SelectedAlgorithm()
+        override public List<int> SelectedAlgorithm()
         {
             List<int> var = null;
             return var;
+        }
+
+        public override void Atack(int atackedFieldId)
+        {
+            throw new NotImplementedException();
         }
     }
 }
