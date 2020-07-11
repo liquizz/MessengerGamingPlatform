@@ -10,9 +10,6 @@ using System.Threading.Channels;
 
 namespace Fighter.src
 {
-    
-
-
     abstract class AbstractField
     {
         protected GameController mapController;

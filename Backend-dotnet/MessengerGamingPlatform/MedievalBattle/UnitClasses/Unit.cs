@@ -9,6 +9,5 @@ namespace MedievalBattle.UnitClasses
     {
         public int HealPoints;
         public int DefencePoints;
-        public int 
     }
 }
