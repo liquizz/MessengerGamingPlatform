@@ -8,7 +8,7 @@ using Dapper;
 using System.Data;
 using Microsoft.Data.SqlClient;
 //using System.Configuration;
-using MessengerGamingPlatform;
+using Api;
 
 namespace Api.Sessions
 {
