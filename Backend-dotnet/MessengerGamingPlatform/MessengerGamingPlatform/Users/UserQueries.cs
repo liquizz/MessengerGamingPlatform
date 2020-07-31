@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
+using Api.Helpers.Sql;
+using Api.Users.Interfaces;
 using Dapper;
 using Database.DTO;
 using Database.Models;
@@ -10,12 +12,12 @@ using Microsoft.Data.SqlClient;
 
 namespace Api.Users
 {
-    public class UserQueries
+    public class UserQueries : IUserQueries
     {
-        private string connectionString = "Server=25.98.56.253;Database=MGP;MultipleActiveResultSets=true;User ID=sa;Password=OKTyaBRSkOE123;";
-        public UserQueries()
+        private string _connectionString;
+        public UserQueries(IConnectionStringHelper helper)
         {
-
+            _connectionString = helper.ConnectionString;
         }
 
         public CreateUser GetUserIdByTelegram(string telegramid)
@@ -24,7 +26,7 @@ namespace Api.Users
 
             var user = new CreateUser();
 
-            using (IDbConnection db = new SqlConnection(connectionString))
+            using (IDbConnection db = new SqlConnection(_connectionString))
             {
                 user = db.Query<CreateUser>(sqlquery).FirstOrDefault();
             }
@@ -38,7 +40,7 @@ namespace Api.Users
 
             var user = new CreateUser();
 
-            using (IDbConnection db = new SqlConnection(connectionString))
+            using (IDbConnection db = new SqlConnection(_connectionString))
             {
                 user = db.Query<CreateUser>(sqlquery).FirstOrDefault();
             }
@@ -51,7 +53,7 @@ namespace Api.Users
 
             var user = new User();
 
-            using (IDbConnection db = new SqlConnection(connectionString))
+            using (IDbConnection db = new SqlConnection(_connectionString))
             {
                 user = db.Query<User>(sqlquery).FirstOrDefault();
             }

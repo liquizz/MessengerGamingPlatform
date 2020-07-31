@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Api.Sessions.Interfaces;
 using Database.DTO;
 using Database.Models;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,17 +10,16 @@ using Database.Repository;
 
 namespace Api.Sessions
 {
-    public class SessionService
+    public class SessionService : ISessionService
     {
-        SessionQueries _query;
+        readonly ISessionQueries _query;
         SessionRepository _repository;
 
-        public SessionService()
+        public SessionService(ISessionQueries queries)
         {
-            SessionQueries Query = new SessionQueries();
             SessionRepository repository = new SessionRepository();
             _repository = repository;
-            _query = Query;
+            _query = queries;
         }
 
         //Получаем список учасников сессии по SessionId

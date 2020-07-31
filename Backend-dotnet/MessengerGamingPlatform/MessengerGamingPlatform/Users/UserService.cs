@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Api.Users.Interfaces;
 using Database.Repository;
 using Microsoft.EntityFrameworkCore.Migrations.Operations.Builders;
 using Database.DTO;
@@ -9,15 +10,15 @@ using Database.Models;
 
 namespace Api.Users
 {
-    public class UserService
+    public class UserService : IUserService
     {
         UserRepository _repository;
-        UserQueries _query;
+        IUserQueries _query;
 
-        public UserService()
+        public UserService(IUserQueries queries)
         {
             _repository = new UserRepository();
-            _query = new UserQueries();
+            _query = queries;
         }
         
         //Логика создания пользователя по TelegramId
