@@ -32,7 +32,7 @@ namespace Fighter.src
         protected string typeName;
         protected int dimensions;       //Занимаемый юнитом размер поля. (Должно быть кратно полю size)
         protected Unit[] units;
-        protected List<AbstractField> enemy; // Пофиксить нейминги САРАЙ СОСЕДА
+        protected List<AbstractField> enemy;
 
         public abstract List<int> SelectedAlgorithm(); //Метод возвращающий доступные для атаки вражеские ячейки (точнее их id), нужен для того что бы бот создавал клавиатуру из этих значений
         public abstract void Atack(int atackedFieldId);

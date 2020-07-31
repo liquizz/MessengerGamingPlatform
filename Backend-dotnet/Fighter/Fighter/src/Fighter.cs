@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Fighter.src
 {
-    class Fighter : AbstractField // Козочки 
+    class Fighter : AbstractField
     {
         override public List<int> SelectedAlgorithm() //Метод возвращающий доступные для атаки вражеские ячейки (точнее их id), нужен для того что бы бот создавал клавиатуру из этих значений
         {
