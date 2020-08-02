@@ -4,12 +4,12 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MedievalBattle.Models.Primitives
+namespace Database.Models.MedievalBattleModels
 {
-    public class AliveField
+    public class Coin
     {
         [Key]
-        public int aliveFieldId { get; set; }
-        public int fieldIndex { get; set; }
+        public int coinId { get; set; }
+        public int value { get; set; }
     }
 }
