@@ -20,14 +20,14 @@ namespace Fighter
         //Типы/id юнитов - Archer/0 
         static void BotSimulyator() //Херовенькая имитация работы бота для отладки
         {
-            GameController kek = new GameController();
+            GameController gameController = new GameController();
 
             //Этап выбора юнитов:
 
             Console.WriteLine("use auto filling? (y/n)");
             if (Console.ReadLine() == "y")
             {
-                mapAutoFilling(kek); //Автозаполнение
+                mapAutoFilling(gameController); //Автозаполнение
             }
             else //Ручное заполнение (оч долго)
             {
@@ -44,9 +44,9 @@ namespace Fighter
                     {
                         Console.WriteLine("team 2: ");
                     }
-                    Console.WriteLine("coins: " + kek.GetCoins(_team));
+                    Console.WriteLine("coins: " + gameController.GetCoins(_team));
                     Console.Write("Free Fields: ");
-                    List<int> freeFields = kek.GetFreeField(_team);
+                    List<int> freeFields = gameController.GetFreeField(_team);
                     for (int j = 0; j < freeFields.Count; j++)
                     {
                         if (j != 0)
@@ -68,13 +68,13 @@ namespace Fighter
                     Console.Write("One unit this type cost - " + unitCosts[unitTypeId]);
                     Console.WriteLine("\nEnter unit count: ");
                     unitCount = Convert.ToInt32(Console.ReadLine());
-                    kek.SetField(_team, unitCount, unitTypeId, fieldId, unitCosts[unitTypeId]);
+                    gameController.SetField(_team, unitCount, unitTypeId, fieldId, unitCosts[unitTypeId]);
                 }
             }
 
             //Этап сражения:
 
-            while (kek.GetGameAvailable())
+            while (gameController.GetGameAvailable())
             {
                 bool a = true;
 
@@ -93,7 +93,7 @@ namespace Fighter
                     a = !a;
                 }
 
-                List<int> availableFields = kek.GetAvailableField(team);
+                List<int> availableFields = gameController.GetAvailableField(team);
                 Console.Write("Available field: ");
                 for (int j = 0; j < availableFields.Count; j++)
                 {
@@ -114,7 +114,7 @@ namespace Fighter
                 switch (action)
                 {
                     case "a":
-                        List<int> selectedField = kek.Teams[team][field].SelectedAlgorithm();
+                        List<int> selectedField = gameController.Teams[team][field].SelectedAlgorithm();
                         Console.Write("Choose field to atack: ");
                         for (int j = 0; j < selectedField.Count; j++)
                         {
@@ -127,29 +127,29 @@ namespace Fighter
                         Console.Write("\n");
 
                         choise = Convert.ToInt32(Console.ReadLine());
-                        kek.Teams[team][field].Atack(choise);
+                        gameController.Teams[team][field].Atack(choise);
 
-                        Console.WriteLine("Your field status: " + kek.Teams[team][field].GetUnitsState());
-                        Console.WriteLine("Enemy field status: " + kek.Teams[(team == 1) ? 0 : 1][choise].GetUnitsState());
+                        Console.WriteLine("Your field status: " + gameController.Teams[team][field].GetUnitsState());
+                        Console.WriteLine("Enemy field status: " + gameController.Teams[(team == 1) ? 0 : 1][choise].GetUnitsState());
                         break;
                 }
 
             }
 
-            Console.WriteLine("Defeat team " + (kek.GetDefeatTeam() + 1));  
+            Console.WriteLine("Defeat team " + (gameController.GetDefeatTeam() + 1));  
         }
 
-        static void mapAutoFilling(GameController kek) //для быстрой отладки
+        static void mapAutoFilling(GameController gameController) //для быстрой отладки
         {
             for (int team = 0; team < 2; team++) {
                 for (int fieldId = 0; fieldId < 8; fieldId++) {
                     if (fieldId != 4 && fieldId != 5)
                     {
-                        kek.SetField(team, 10, 1, fieldId, unitCosts[1]);
+                        gameController.SetField(team, 10, 1, fieldId, unitCosts[1]);
                     }
                     else
                     {
-                        kek.SetField(team, 10, 0, fieldId, unitCosts[0]);
+                        gameController.SetField(team, 10, 0, fieldId, unitCosts[0]);
                     }
                 } 
             }

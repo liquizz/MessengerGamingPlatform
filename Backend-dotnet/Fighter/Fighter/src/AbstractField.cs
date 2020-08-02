@@ -62,7 +62,7 @@ namespace Fighter.src
             for (int i = 0; i < count; i++) {
                 if (units[i] != null)
                 {
-                    state += ( units[i].hp + " ");
+                    state +=  units[i].hp + " ";
                 }
                 else
                 {
@@ -76,7 +76,7 @@ namespace Fighter.src
         public void LongRangeExposure(int shellCount, int shellDamage) {
             Random rnd = new Random();
             for (int i = 0; i < shellCount; i++) {
-                int unitPos =rnd.Next(1, size / dimensions); //Рандомиться ячейка в которую попадет стрела (если 0, то стрела не попала не куда)
+                int unitPos = rnd.Next(1, size / dimensions); //Рандомиться ячейка в которую попадет стрела (если 0, то стрела не попала не куда)
                 if (unitPos < count)
                 {
                     if (units[unitPos] != null)
