@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Database.Models;
 using Database.DTO;
 using Api.Users;
+using Api.Users.Interfaces;
 
 namespace Api.Controllers
 {
@@ -15,12 +16,12 @@ namespace Api.Controllers
     public class UsersController : ControllerBase
     {
         private readonly DatabaseContext _context;
-        private readonly UserService _service;
+        private readonly IUserService _service;
 
-        public UsersController(DatabaseContext context)
+        public UsersController(DatabaseContext context, UserService service)
         {
             context = _context;
-            _service = new UserService();
+            _service = service;
         }
 
         [HttpGet]

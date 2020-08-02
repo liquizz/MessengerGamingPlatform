@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Database.Models;
 using Database.DTO;
 using Api.Sessions;
+using Api.Sessions.Interfaces;
 
 namespace Api.Controllers
 {
@@ -14,13 +15,11 @@ namespace Api.Controllers
     [ApiController]
     public class SessionsController : ControllerBase
     {
-        private readonly DatabaseContext _context;
-        SessionService _service;
+        readonly ISessionService _service;
 
-        public SessionsController(DatabaseContext context)
+        public SessionsController(SessionService service)
         {
-            context = _context;
-            _service = new SessionService();
+            _service = service;
         }
 
         // Сделать метод для получения id сессии

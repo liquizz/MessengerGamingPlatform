@@ -8,16 +8,18 @@ using Dapper;
 using System.Data;
 using Microsoft.Data.SqlClient;
 //using System.Configuration;
-using MessengerGamingPlatform;
+using Api;
+using Api.Helpers.Sql;
+using Api.Sessions.Interfaces;
 
 namespace Api.Sessions
 {
-    public class SessionQueries
+    public class SessionQueries : ISessionQueries
     {
-        private string connectionString = "Server=25.98.56.253;Database=MGP;MultipleActiveResultSets=true;User ID=sa;Password=OKTyaBRSkOE123;";
-        public SessionQueries()
+        private string _connectionString;
+        public SessionQueries(IConnectionStringHelper helper)
         {
-
+            _connectionString = helper.ConnectionString;
         }
         public List<SessionParticipants> GetSessionParticipants(int SessionId)
         {
@@ -29,7 +31,7 @@ namespace Api.Sessions
 
             var participants = new List<SessionParticipants>();
 
-            using (IDbConnection db = new SqlConnection(connectionString))
+            using (IDbConnection db = new SqlConnection(_connectionString))
             {
                 participants = db.Query<SessionParticipants>(sqlquery).ToList();
             }
@@ -45,7 +47,7 @@ namespace Api.Sessions
 
             var session = new Session();
 
-            using (IDbConnection db = new SqlConnection(connectionString))
+            using (IDbConnection db = new SqlConnection(_connectionString))
             {
                 session = db.Query<Session>(sqlquery).FirstOrDefault();
             }
@@ -59,7 +61,7 @@ namespace Api.Sessions
 
             var usession = new GetUsersSessionsMedievalBattle();
 
-            using (IDbConnection db = new SqlConnection(connectionString))
+            using (IDbConnection db = new SqlConnection(_connectionString))
             {
                 usession = db.Query<GetUsersSessionsMedievalBattle>(sqlquery).FirstOrDefault();
             }
@@ -74,7 +76,7 @@ namespace Api.Sessions
 
             var session = new List<Session>();
 
-            using (IDbConnection db = new SqlConnection(connectionString))
+            using (IDbConnection db = new SqlConnection(_connectionString))
             {
                 session = db.Query<Session>(sqlquery).ToList();
             }
