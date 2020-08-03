@@ -9,26 +9,26 @@ namespace Database.Models.MedievalBattleModels
     public class AbstractField
     {
         [Key]
-        public int abstractFieldId { get; set; }
+        public int AbstractFieldId { get; set; }
 
         // Field characteristics
-        public int teamId { get; set; }
-        public int positionId { get; set; } // Будет в отдельной таблице enum
-        public int fieldSize { get; set; }
+        public int TeamId { get; set; }
+        public int PositionId { get; set; } // Будет в отдельной таблице enum
+        public int FieldSize { get; set; }
 
-        public int fieldHp { get; set; }
-        public int fieldDamage { get; set; }
-        public int fieldArmor { get; set; }
-        public int fieldUnitCount { get; set; }
+        public int FieldHp { get; set; }
+        public int FieldDamage { get; set; }
+        public int FieldArmor { get; set; }
+        public int FieldUnitCount { get; set; }
 
         // Unit characteristics
-        public int hpPerUnit { get; set; }
-        public int damagePerUnit { get; set; }
-        public int unitCost { get; set; }
+        public int HpPerUnit { get; set; }
+        public int DamagePerUnit { get; set; }
+        public int UnitCost { get; set; }
 
 
         public LocalStatistic LocalStatistic { get; set; }
-        public GameController gameController { get; set; }
+        public GameController GameController { get; set; }
         public List<Unit> Units { get; set; }
         public List<AbstractField> Enemies { get; set; }
 

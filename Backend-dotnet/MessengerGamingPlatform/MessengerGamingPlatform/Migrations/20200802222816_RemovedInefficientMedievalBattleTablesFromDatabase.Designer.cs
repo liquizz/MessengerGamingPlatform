@@ -4,14 +4,16 @@ using Database.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Api.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20200802222816_RemovedInefficientMedievalBattleTablesFromDatabase")]
+    partial class RemovedInefficientMedievalBattleTablesFromDatabase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -19,63 +21,86 @@ namespace Api.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Database.Models.MedievalBattleModels.AbstractField", b =>
+            modelBuilder.Entity("Database.Models.MedievalBattle", b =>
                 {
-                    b.Property<int>("AbstractFieldId")
+                    b.Property<int>("MedievalBatlleId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("AbstractFieldId1")
+                    b.Property<int>("SessionMedievalBattleId")
                         .HasColumnType("int");
 
-                    b.Property<int>("DamagePerUnit")
+                    b.Property<int?>("abstractFieldId")
                         .HasColumnType("int");
+
+                    b.HasKey("MedievalBatlleId");
+
+                    b.HasIndex("SessionMedievalBattleId")
+                        .IsUnique();
+
+                    b.HasIndex("abstractFieldId");
+
+                    b.ToTable("MedievalBattles");
+                });
+
+            modelBuilder.Entity("Database.Models.MedievalBattleModels.AbstractField", b =>
+                {
+                    b.Property<int>("abstractFieldId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Discriminator")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("FieldArmor")
-                        .HasColumnType("int");
-
-                    b.Property<int>("FieldDamage")
-                        .HasColumnType("int");
-
-                    b.Property<int>("FieldHp")
-                        .HasColumnType("int");
-
-                    b.Property<int>("FieldSize")
-                        .HasColumnType("int");
-
-                    b.Property<int>("FieldUnitCount")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("GameControllerId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("HpPerUnit")
-                        .HasColumnType("int");
-
                     b.Property<int?>("LocalStatisticId")
                         .HasColumnType("int");
 
-                    b.Property<int>("PositionId")
+                    b.Property<int?>("abstractFieldId1")
                         .HasColumnType("int");
 
-                    b.Property<int>("TeamId")
+                    b.Property<int>("damagePerUnit")
                         .HasColumnType("int");
 
-                    b.Property<int>("UnitCost")
+                    b.Property<int>("fieldArmor")
                         .HasColumnType("int");
 
-                    b.HasKey("AbstractFieldId");
+                    b.Property<int>("fieldDamage")
+                        .HasColumnType("int");
 
-                    b.HasIndex("AbstractFieldId1");
+                    b.Property<int>("fieldHp")
+                        .HasColumnType("int");
 
-                    b.HasIndex("GameControllerId");
+                    b.Property<int>("fieldSize")
+                        .HasColumnType("int");
+
+                    b.Property<int>("fieldUnitCount")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("gameControllerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("hpPerUnit")
+                        .HasColumnType("int");
+
+                    b.Property<int>("positionId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("teamId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("unitCost")
+                        .HasColumnType("int");
+
+                    b.HasKey("abstractFieldId");
 
                     b.HasIndex("LocalStatisticId");
+
+                    b.HasIndex("abstractFieldId1");
+
+                    b.HasIndex("gameControllerId");
 
                     b.ToTable("AbstractFields");
 
@@ -84,67 +109,66 @@ namespace Api.Migrations
 
             modelBuilder.Entity("Database.Models.MedievalBattleModels.AliveField", b =>
                 {
-                    b.Property<int>("AliveFieldId")
+                    b.Property<int>("aliveFieldId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("FieldIndex")
+                    b.Property<int>("fieldIndex")
                         .HasColumnType("int");
 
-                    b.Property<int?>("GameControllerId")
+                    b.Property<int?>("gameControllerId")
                         .HasColumnType("int");
 
-                    b.HasKey("AliveFieldId");
+                    b.HasKey("aliveFieldId");
 
-                    b.HasIndex("GameControllerId");
+                    b.HasIndex("gameControllerId");
 
                     b.ToTable("aliveFieldsCount");
                 });
 
             modelBuilder.Entity("Database.Models.MedievalBattleModels.Coin", b =>
                 {
-                    b.Property<int>("CoinId")
+                    b.Property<int>("coinId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("GameControllerId")
+                    b.Property<int?>("gameControllerId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Value")
+                    b.Property<int>("value")
                         .HasColumnType("int");
 
-                    b.HasKey("CoinId");
+                    b.HasKey("coinId");
 
-                    b.HasIndex("GameControllerId");
+                    b.HasIndex("gameControllerId");
 
                     b.ToTable("Coins");
                 });
 
             modelBuilder.Entity("Database.Models.MedievalBattleModels.GameController", b =>
                 {
-                    b.Property<int>("GameControllerId")
+                    b.Property<int>("gameControllerId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CurrentTurn")
+                    b.Property<int?>("SessionMedievalBattleId")
                         .HasColumnType("int");
 
-                    b.Property<int>("DefeatTeam")
+                    b.Property<int>("currentTurn")
                         .HasColumnType("int");
 
-                    b.Property<bool>("GameAvaliable")
+                    b.Property<int>("defeatTeam")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("gameAvaliable")
                         .HasColumnType("bit");
 
-                    b.Property<int>("SessionMedievalBattleId")
-                        .HasColumnType("int");
+                    b.HasKey("gameControllerId");
 
-                    b.HasKey("GameControllerId");
-
-                    b.HasIndex("SessionMedievalBattleId")
-                        .IsUnique();
+                    b.HasIndex("SessionMedievalBattleId");
 
                     b.ToTable("GameControllers");
                 });
@@ -156,10 +180,10 @@ namespace Api.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("UnitAliveCount")
+                    b.Property<int>("unitAliveCount")
                         .HasColumnType("int");
 
-                    b.Property<int>("UnitDeadCount")
+                    b.Property<int>("unitDeadCount")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -169,29 +193,29 @@ namespace Api.Migrations
 
             modelBuilder.Entity("Database.Models.MedievalBattleModels.Unit", b =>
                 {
-                    b.Property<int>("UnitId")
+                    b.Property<int>("unitId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Armor")
+                    b.Property<int>("armor")
                         .HasColumnType("int");
 
-                    b.Property<int>("ArmorDurability")
+                    b.Property<int>("armorDurability")
                         .HasColumnType("int");
 
-                    b.Property<int>("Damage")
+                    b.Property<int>("damage")
                         .HasColumnType("int");
 
-                    b.Property<int>("Hp")
+                    b.Property<int>("hp")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ParentObjectAbstractFieldId")
+                    b.Property<int?>("parentObjectabstractFieldId")
                         .HasColumnType("int");
 
-                    b.HasKey("UnitId");
+                    b.HasKey("unitId");
 
-                    b.HasIndex("ParentObjectAbstractFieldId");
+                    b.HasIndex("parentObjectabstractFieldId");
 
                     b.ToTable("Units");
                 });
@@ -304,49 +328,60 @@ namespace Api.Migrations
                     b.HasDiscriminator().HasValue("Flank");
                 });
 
+            modelBuilder.Entity("Database.Models.MedievalBattle", b =>
+                {
+                    b.HasOne("Database.Models.SessionMedievalBattle", "SessionMedievalBattle")
+                        .WithOne("MedievalBattle")
+                        .HasForeignKey("Database.Models.MedievalBattle", "SessionMedievalBattleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Database.Models.MedievalBattleModels.AbstractField", "AbstractField")
+                        .WithMany()
+                        .HasForeignKey("abstractFieldId");
+                });
+
             modelBuilder.Entity("Database.Models.MedievalBattleModels.AbstractField", b =>
                 {
-                    b.HasOne("Database.Models.MedievalBattleModels.AbstractField", null)
-                        .WithMany("Enemies")
-                        .HasForeignKey("AbstractFieldId1");
-
-                    b.HasOne("Database.Models.MedievalBattleModels.GameController", "GameController")
-                        .WithMany()
-                        .HasForeignKey("GameControllerId");
-
                     b.HasOne("Database.Models.MedievalBattleModels.LocalStatistic", "LocalStatistic")
                         .WithMany()
                         .HasForeignKey("LocalStatisticId");
+
+                    b.HasOne("Database.Models.MedievalBattleModels.AbstractField", null)
+                        .WithMany("Enemies")
+                        .HasForeignKey("abstractFieldId1");
+
+                    b.HasOne("Database.Models.MedievalBattleModels.GameController", "gameController")
+                        .WithMany()
+                        .HasForeignKey("gameControllerId");
                 });
 
             modelBuilder.Entity("Database.Models.MedievalBattleModels.AliveField", b =>
                 {
                     b.HasOne("Database.Models.MedievalBattleModels.GameController", null)
-                        .WithMany("AliveFieldsCount")
-                        .HasForeignKey("GameControllerId");
+                        .WithMany("aliveFieldsCount")
+                        .HasForeignKey("gameControllerId");
                 });
 
             modelBuilder.Entity("Database.Models.MedievalBattleModels.Coin", b =>
                 {
                     b.HasOne("Database.Models.MedievalBattleModels.GameController", null)
-                        .WithMany("Coins")
-                        .HasForeignKey("GameControllerId");
+                        .WithMany("coins")
+                        .HasForeignKey("gameControllerId");
                 });
 
             modelBuilder.Entity("Database.Models.MedievalBattleModels.GameController", b =>
                 {
-                    b.HasOne("Database.Models.SessionMedievalBattle", "SessionMedievalBattle")
-                        .WithOne("GameController")
-                        .HasForeignKey("Database.Models.MedievalBattleModels.GameController", "SessionMedievalBattleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasOne("Database.Models.SessionMedievalBattle", "sessionMedievalBattle")
+                        .WithMany()
+                        .HasForeignKey("SessionMedievalBattleId");
                 });
 
             modelBuilder.Entity("Database.Models.MedievalBattleModels.Unit", b =>
                 {
-                    b.HasOne("Database.Models.MedievalBattleModels.AbstractField", "ParentObject")
+                    b.HasOne("Database.Models.MedievalBattleModels.AbstractField", "parentObject")
                         .WithMany("Units")
-                        .HasForeignKey("ParentObjectAbstractFieldId");
+                        .HasForeignKey("parentObjectabstractFieldId");
                 });
 
             modelBuilder.Entity("Database.Models.UserStatistics", b =>
