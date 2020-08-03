@@ -51,12 +51,12 @@ namespace Api.Config
                 .As<IAreaWriteService>()
                 .InstancePerLifetimeScope();
 
-            builder.Register(c => new SessionWriteService())
-                .As<ISessionWriteService>()
+            builder.Register(c => new SessionRepository())
+                .As<ISessionRepository>()
                 .InstancePerLifetimeScope();
 
-            builder.Register(c => new UsersWriteService())
-                .As<IUsersWriteService>()
+            builder.Register(c => new UsersRepository())
+                .As<IUsersRepository>()
                 .InstancePerLifetimeScope();
         }
 
@@ -70,8 +70,8 @@ namespace Api.Config
             builder.RegisterType<AreaQueries>();
             builder.RegisterType<AreaReadService>();
             builder.RegisterType<AreaWriteService>();
-            builder.RegisterType<SessionWriteService>();
-            builder.RegisterType<UsersWriteService>();
+            builder.RegisterType<SessionRepository>();
+            builder.RegisterType<UsersRepository>();
 
             return builder;
         }

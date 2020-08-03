@@ -12,12 +12,12 @@ namespace Database.ReadServices.Users
 {
     public class UserReadService : IUserReadService
     {
-        UsersWriteService _repository;
+        UsersRepository _repository;
         IUserQueries _query;
 
         public UserReadService(IUserQueries queries)
         {
-            _repository = new UsersWriteService();
+            _repository = new UsersRepository();
             _query = queries;
         }
         

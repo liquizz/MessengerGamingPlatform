@@ -13,11 +13,11 @@ namespace Database.ReadServices.Sessions
     public class SessionReadService : ISessionReadService
     {
         readonly ISessionQueries _query;
-        SessionWriteService _repository;
+        SessionRepository _repository;
 
         public SessionReadService(ISessionQueries queries)
         {
-            SessionWriteService repository = new SessionWriteService();
+            SessionRepository repository = new SessionRepository();
             _repository = repository;
             _query = queries;
         }

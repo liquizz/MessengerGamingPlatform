@@ -10,9 +10,9 @@ namespace Fighter.src
                    armor,
                    armorDurability,
                     id;
-        AbstractField father;
+        AbstractArea father;
 
-        public Unit(int hp, int damage, int armor, int id, AbstractField field)
+        public Unit(int hp, int damage, int armor, int id, AbstractArea field)
         {
             this.hp = hp;
             this.damage = damage;
@@ -21,7 +21,7 @@ namespace Fighter.src
             this.id = id;
         }
 
-        public void DealingDamage(int damag)
+        public void DoDamage(int damag)
         {
 
             if (armorDurability != 0)

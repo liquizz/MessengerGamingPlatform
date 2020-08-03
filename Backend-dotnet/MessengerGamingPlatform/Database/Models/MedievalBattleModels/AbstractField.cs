@@ -27,6 +27,7 @@ namespace Database.Models.MedievalBattleModels
         public int HpPerUnit { get; set; }
         public int DamagePerUnit { get; set; }
         public int UnitCost { get; set; }
+        public int UnitSize { get; set; }
 
 
         public LocalStatistic LocalStatistic { get; set; }
@@ -34,5 +35,21 @@ namespace Database.Models.MedievalBattleModels
         public List<Unit> Units { get; set; }
         public List<AbstractField> Enemies { get; set; }
 
+
+        public void LongRangeExposure(int shellCount, int shellDamage)
+        { // Amount of archers and damage per 1 archer
+            Random rnd = new Random();
+            for (int i = 0; i < shellCount; i++)
+            {
+                int unitPos = rnd.Next(1, FieldSize / UnitSize);
+                if (unitPos < FieldUnitCount) // TODO : FIX THOSE NAMINGS
+                {
+                    if (Units[unitPos] != null)
+                    {
+                        Units[unitPos].DoDamage(shellDamage);
+                    }
+                }
+            }
+        }
     }
 }

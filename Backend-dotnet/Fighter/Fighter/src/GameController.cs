@@ -9,7 +9,7 @@ namespace Fighter.src
 {
     class GameController
     {
-        public List<AbstractField>[] Teams = new List<AbstractField>[2];
+        public List<AbstractArea>[] Teams = new List<AbstractArea>[2];
         int[] coins = new int[2] { 2500, 2500 };
         int[] availableFieldsCount = new int[2] {8, 8};
         bool gameAvailable = true;
@@ -20,7 +20,7 @@ namespace Fighter.src
         {
             for (int j = 0; j < 2; j++)
             {
-                Teams[j] = new List<AbstractField>();
+                Teams[j] = new List<AbstractArea>();
                 for (int i = 0; i < 8; i++)
                 {
                     Teams[j].Add(null);

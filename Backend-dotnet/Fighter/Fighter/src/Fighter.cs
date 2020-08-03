@@ -12,14 +12,14 @@ namespace Fighter.src
 
             for (int id = 0; id < 8; id++)
             {
-                if (enemy[id] != null)
+                if (Enemy[id] != null)
                 {
                     int line = id / 2;
-                    if (enemy[line * 2] != null)
+                    if (Enemy[line * 2] != null)
                     {
                         var.Add(line * 2);
                     }
-                    if (enemy[line * 2 + 1] != null)
+                    if (Enemy[line * 2 + 1] != null)
                     {
                         var.Add(line * 2 + 1);
                     }
@@ -31,7 +31,7 @@ namespace Fighter.src
 
         public override void Attack(int attackedFieldId)
         {
-            enemy[attackedFieldId].DirectExposure(this);
+            Enemy[attackedFieldId].DirectExposure(this);
         }
     }
 
@@ -41,17 +41,17 @@ namespace Fighter.src
         {
             this.mapController = mapController;
 
-            typeName = "Warrior";
+            TypeName = "Warrior";
             this.teamId = teamId;
             this.position = position;
 
-            this.enemy = enemy;
+            this.Enemy = enemy;
             this.count = count;
             hpPerUnit = 100;
             damagePerUnit = 20;
             armor = 10;
-            dimensions = 1;
-            units = new Unit[count];
+            Dimensions = 1;
+            Units = new Unit[count];
             FillField(count);
         }
     }
