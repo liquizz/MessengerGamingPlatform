@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Database.Models;
 using Database.DTO;
-using Api.Sessions;
-using Api.Sessions.Interfaces;
+using Database.ReadServices.Sessions;
+using Database.ReadServices.Sessions.Interfaces;
 
 namespace Api.Controllers
 {
@@ -15,9 +15,9 @@ namespace Api.Controllers
     [ApiController]
     public class SessionsController : ControllerBase
     {
-        readonly ISessionService _service;
+        readonly ISessionReadService _service;
 
-        public SessionsController(SessionService service)
+        public SessionsController(SessionReadService service)
         {
             _service = service;
         }

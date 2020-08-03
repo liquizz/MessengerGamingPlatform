@@ -9,7 +9,7 @@ namespace Database.Models.MedievalBattleModels
     public class AliveField
     {
         [Key]
-        public int aliveFieldId { get; set; }
-        public int fieldIndex { get; set; }
+        public int AliveFieldId { get; set; }
+        public int FieldIndex { get; set; }
     }
 }

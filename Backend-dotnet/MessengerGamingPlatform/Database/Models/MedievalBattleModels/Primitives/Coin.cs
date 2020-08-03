@@ -9,7 +9,7 @@ namespace Database.Models.MedievalBattleModels
     public class Coin
     {
         [Key]
-        public int coinId { get; set; }
-        public int value { get; set; }
+        public int CoinId { get; set; }
+        public int Value { get; set; }
     }
 }
