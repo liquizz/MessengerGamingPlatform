@@ -1,0 +1,13 @@
+﻿{
+	Update DB:
+	EntityFrameworkCore\Update-Database -StartupProject:Api
+
+	Create new migration:
+	EntityFrameworkCore\Add-Migration "" -StartupProject:Api
+
+	Revert/Update DB to specific migration:
+	EntityFrameworkCore\Update-Database -TargetMigration:"" -StartupProject:Api
+
+	Revert/Update DB to specific migration with Data loss:
+	EntityFrameworkCore\Update-Database -Force -TargetMigration:"" -StartupProject:Api
+}
