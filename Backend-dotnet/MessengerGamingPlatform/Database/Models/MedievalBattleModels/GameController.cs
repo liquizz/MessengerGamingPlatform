@@ -10,12 +10,14 @@ namespace Database.Models.MedievalBattleModels
     public class GameController
     {
         [Key]
-        public int gameControllerId { get; set; }
-        public SessionMedievalBattle sessionMedievalBattle { get; set; }
-        public List<Coin> coins { get; set; }
-        public List<AliveField> aliveFieldsCount { get; set; }
-        public bool gameAvaliable { get; set; }
-        public int defeatTeam { get; set; }
-        public int currentTurn { get; set; }
+        public int GameControllerId { get; set; }
+
+        public int SessionMedievalBattleId { get; set; }
+        public SessionMedievalBattle SessionMedievalBattle { get; set; }
+        public List<Coin> Coins { get; set; }
+        public List<AliveField> AliveFieldsCount { get; set; }
+        public bool GameAvaliable { get; set; }
+        public int DefeatTeam { get; set; }
+        public int CurrentTurn { get; set; }
     }
 }

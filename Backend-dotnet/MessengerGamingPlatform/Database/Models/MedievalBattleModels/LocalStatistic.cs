@@ -8,7 +8,7 @@ namespace Database.Models.MedievalBattleModels
     public class LocalStatistic
     {
         public int Id { get; set; }
-        public int unitAliveCount { get; set; }
-        public int unitDeadCount { get; set; }
+        public int UnitAliveCount { get; set; }
+        public int UnitDeadCount { get; set; }
     }
 }

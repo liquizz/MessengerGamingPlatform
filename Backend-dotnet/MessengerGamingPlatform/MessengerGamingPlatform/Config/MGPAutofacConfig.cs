@@ -1,68 +1,72 @@
 ﻿using Autofac;
-using MedievalBattle.Helpers.Sql;
-using MedievalBattle.Queries;
-using MedievalBattle.Queries.Interfaces;
-using MedievalBattle.Services;
-using MedievalBattle.Services.Interfaces;
+using Database.Helpers.Sql;
+using Database.ReadServices.MedievalBattle;
 using Microsoft.Extensions.Configuration;
-using Api.Helpers.Sql;
-using Api.Sessions;
-using Api.Sessions.Interfaces;
-using Api.Users;
-using Api.Users.Interfaces;
-using ConnectionStringHelper = Api.Helpers.Sql.ConnectionStringHelper;
-using IConnectionStringHelper = Api.Helpers.Sql.IConnectionStringHelper;
+using Database.ReadServices.Sessions;
+using Database.ReadServices.Sessions.Interfaces;
+using Database.ReadServices.Users;
+using Database.ReadServices.Users.Interfaces;
+using Database.WriteServices.MedievalBattle.Interfaces;
+using Database.WriteServices.MedievalBattle;
+using Database.WriteServices.Sessions;
+using Database.WriteServices.Sessions.Interfaces;
+using Database.WriteServices.Users;
+using Database.WriteServices.Users.Interfaces;
 
 namespace Api.Config
 {
     public class MGPAutofacConfig : Module
     {
-        // TODO: переписать стуктуру проекта (перенести Api.Sessions => Database)
         protected override void Load(ContainerBuilder builder)
         {
-            builder.Register(c => new Helpers.Sql.ConnectionStringHelper(c.Resolve<IConfiguration>())) 
-                .As<Helpers.Sql.IConnectionStringHelper>()
+            builder.Register(c => new ConnectionStringHelper(c.Resolve<IConfiguration>()))
+                .As<IConnectionStringHelper>()
                 .InstancePerLifetimeScope();
 
-            builder.Register(c => new SessionQueries(c.Resolve<Helpers.Sql.IConnectionStringHelper>())) 
+            builder.Register(c => new SessionQueries(c.Resolve<IConnectionStringHelper>()))
                 .As<ISessionQueries>()
                 .InstancePerLifetimeScope();
 
-            builder.Register(c => new SessionService(c.Resolve<ISessionQueries>())) 
-                .As<ISessionService>()
+            builder.Register(c => new SessionReadService(c.Resolve<ISessionQueries>())) 
+                .As<ISessionReadService>()
                 .InstancePerLifetimeScope();
 
-            builder.Register(c => new UserQueries(c.Resolve<Helpers.Sql.IConnectionStringHelper>()))
+            builder.Register(c => new UserQueries(c.Resolve<IConnectionStringHelper>()))
                 .As<IUserQueries>()
                 .InstancePerLifetimeScope();
 
-            builder.Register(c => new UserService(c.Resolve<IUserQueries>()))
-                .As<IUserService>()
+            builder.Register(c => new UserReadService(c.Resolve<IUserQueries>()))
+                .As<IUserReadService>()
                 .InstancePerLifetimeScope();
 
-            builder.Register(c => new MedievalBattle.Helpers.Sql.ConnectionStringHelper(c.Resolve<IConfiguration>()))
-                .As<MedievalBattle.Helpers.Sql.IConnectionStringHelper>()
-                .InstancePerLifetimeScope();
-
-            builder.Register(c => new AreaQueries(c.Resolve<MedievalBattle.Helpers.Sql.IConnectionStringHelper>()))
+            builder.Register(c => new AreaQueries(c.Resolve<IConnectionStringHelper>()))
                 .As<IAreaQueries>()
                 .InstancePerLifetimeScope();
 
-            builder.Register(c => new AreaService(c.Resolve<IAreaQueries>()))
-                .As<IAreaService>()
+            builder.Register(c => new AreaWriteService(c.Resolve<IAreaQueries>()))
+                .As<IAreaWriteService>()
+                .InstancePerLifetimeScope();
+
+            builder.Register(c => new SessionWriteService())
+                .As<ISessionWriteService>()
+                .InstancePerLifetimeScope();
+
+            builder.Register(c => new UsersWriteService())
+                .As<IUsersWriteService>()
                 .InstancePerLifetimeScope();
         }
 
         public static ContainerBuilder ContainerBuilderConfig(ContainerBuilder builder)
         {
-            builder.RegisterType<Api.Helpers.Sql.ConnectionStringHelper>();
+            builder.RegisterType<ConnectionStringHelper>();
             builder.RegisterType<SessionQueries>();
-            builder.RegisterType<SessionService>();
+            builder.RegisterType<SessionReadService>();
             builder.RegisterType<UserQueries>();
-            builder.RegisterType<UserService>();
-            builder.RegisterType<MedievalBattle.Helpers.Sql.ConnectionStringHelper>();
+            builder.RegisterType<UserReadService>();
             builder.RegisterType<AreaQueries>();
-            builder.RegisterType<AreaService>();
+            builder.RegisterType<AreaWriteService>();
+            builder.RegisterType<SessionWriteService>();
+            builder.RegisterType<UsersWriteService>();
 
             return builder;
         }

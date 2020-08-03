@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Database.Models;
 using Database.DTO;
-using Api.Users;
-using Api.Users.Interfaces;
+using Database.ReadServices.Users;
+using Database.ReadServices.Users.Interfaces;
 
 namespace Api.Controllers
 {
@@ -15,12 +15,12 @@ namespace Api.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly DatabaseContext _context;
-        private readonly IUserService _service;
+        //private readonly DatabaseContext _context;
+        private readonly IUserReadService _service;
 
-        public UsersController(DatabaseContext context, UserService service)
+        public UsersController(UserReadService service)
         {
-            context = _context;
+            //context = _context;
             _service = service;
         }
 

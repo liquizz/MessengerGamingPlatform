@@ -9,11 +9,11 @@ namespace Database.Models.MedievalBattleModels
     public class Unit
     {
         [Key]
-        public int unitId { get; set; }
-        public int hp { get; set; }
-        public int damage { get;set; }
-        public int armor { get; set; }
-        public int armorDurability { get; set; }
-        public AbstractField parentObject { get; set; }
+        public int UnitId { get; set; }
+        public int Hp { get; set; }
+        public int Damage { get;set; }
+        public int Armor { get; set; }
+        public int ArmorDurability { get; set; }
+        public AbstractField ParentObject { get; set; }
     }
 }
