@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Fighter.src
 {
-    class Flank : AbstractField
+    class Flank : AbstractArea
     {
         override public List<int> SelectedAlgorithm()
         {
@@ -12,7 +12,7 @@ namespace Fighter.src
             return var;
         }
 
-        public override void Atack(int atackedFieldId)
+        public override void Attack(int attackedFieldId)
         {
             throw new NotImplementedException();
         }

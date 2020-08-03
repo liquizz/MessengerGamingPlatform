@@ -10,5 +10,10 @@ namespace Database.WriteServices.MedievalBattle
         {
             _queries = queries;
         }
+
+        public bool FillArea(int unitsAmount)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

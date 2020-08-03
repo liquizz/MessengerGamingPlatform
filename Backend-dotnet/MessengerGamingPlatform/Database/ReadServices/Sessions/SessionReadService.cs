@@ -32,7 +32,6 @@ namespace Database.ReadServices.Sessions
         //Создаем сессию для пользователя с UserId
         public Session CreateSessionMedievalBattles(int UserId)
         {
-            //throw new Exception("pidoras");
             var response = _repository.CreateSessionMedievalBattles(UserId);
             return GetSession(UserId);
         }

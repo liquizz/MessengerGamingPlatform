@@ -17,7 +17,7 @@ namespace Database.Models.MedievalBattleModels
         public List<Coin> Coins { get; set; }
         public List<AliveField> AliveFieldsCount { get; set; }
         public bool GameAvaliable { get; set; }
-        public int DefeatTeam { get; set; }
+        public int? DefeatTeam { get; set; }
         public int CurrentTurn { get; set; }
     }
 }

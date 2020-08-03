@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Fighter.src
 {
-    class Fighter : AbstractField
+    class Fighter : AbstractArea
     {
         override public List<int> SelectedAlgorithm() //Метод возвращающий доступные для атаки вражеские ячейки (точнее их id), нужен для того что бы бот создавал клавиатуру из этих значений
         {
@@ -29,15 +29,15 @@ namespace Fighter.src
             return var;
         }
 
-        public override void Atack(int atackedFieldId)
+        public override void Attack(int attackedFieldId)
         {
-            enemy[atackedFieldId].DirectExposure(this);
+            enemy[attackedFieldId].DirectExposure(this);
         }
     }
 
     class Warrior: Fighter
     {
-        public Warrior(int count, int teamId , int position, List<AbstractField> enemy, GameController mapController)
+        public Warrior(int count, int teamId , int position, List<AbstractArea> enemy, GameController mapController)
         {
             this.mapController = mapController;
 

@@ -19,9 +19,9 @@ namespace Fighter.src
             return var;
         }
 
-        public override void Atack(int atackedFieldId)
+        public override void Attack(int attackedFieldId)
         {
-            enemy[atackedFieldId].LongRangeExposure(this.count, this.damagePerUnit);
+            enemy[attackedFieldId].LongRangeExposure(this.count, this.damagePerUnit);
         }
     }
 

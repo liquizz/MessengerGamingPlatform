@@ -127,7 +127,7 @@ namespace Fighter
                         Console.Write("\n");
 
                         choise = Convert.ToInt32(Console.ReadLine());
-                        gameController.Teams[team][field].Atack(choise);
+                        gameController.Teams[team][field].Attack(choise);
 
                         Console.WriteLine("Your field status: " + gameController.Teams[team][field].GetUnitsState());
                         Console.WriteLine("Enemy field status: " + gameController.Teams[(team == 1) ? 0 : 1][choise].GetUnitsState());

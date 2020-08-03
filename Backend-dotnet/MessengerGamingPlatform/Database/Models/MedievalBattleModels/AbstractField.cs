@@ -20,6 +20,8 @@ namespace Database.Models.MedievalBattleModels
         public int FieldDamage { get; set; }
         public int FieldArmor { get; set; }
         public int FieldUnitCount { get; set; }
+        public int AliveUnitCount { get; set; }
+        public int DeadUnitCount { get; set; }
 
         // Unit characteristics
         public int HpPerUnit { get; set; }

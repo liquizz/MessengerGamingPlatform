@@ -10,7 +10,7 @@ using System.Threading.Channels;
 
 namespace Fighter.src
 {
-    abstract class AbstractField
+    abstract class AbstractArea
     {
         protected GameController mapController;
 
@@ -27,23 +27,23 @@ namespace Fighter.src
                       damage,           //Зависим от количества
                       armor,            //Не зависим от количества
                       count,            //Кол-во юнитов
-                      liveCount,
+                      aliveCount,
                       deadCount;
-        protected string typeName;
-        protected int dimensions;       //Занимаемый юнитом размер поля. (Должно быть кратно полю size)
-        protected Unit[] units;
-        protected List<AbstractField> enemy;
+        protected string TypeName;
+        protected int Dimensions;       //Занимаемый юнитом размер поля. (Должно быть кратно полю size)
+        protected Unit[] Units;
+        protected List<AbstractArea> Enemy;
 
         public abstract List<int> SelectedAlgorithm(); //Метод возвращающий доступные для атаки вражеские ячейки (точнее их id), нужен для того что бы бот создавал клавиатуру из этих значений
-        public abstract void Atack(int atackedFieldId);
+        public abstract void Attack(int attackedFieldId);
 
         public void FillField(int count)
-        { //Заполняет поле юнитами в зависимости от Размера поля (size), Габоритов юнитов (dimensions), и их количества (count)
-            this.liveCount = count;
+        { //Заполняет поле юнитами в зависимости от Размера поля (size), Габоритов юнитов (Dimensions), и их количества (count)
+            this.aliveCount = count;
             this.deadCount = 0;
             for (int i = 0; i < count; i++)
             {
-                units[i] = new Unit(hpPerUnit, damagePerUnit, armor, i, this);
+                Units[i] = new Unit(hpPerUnit, damagePerUnit, armor, i, this);
             }
             //Делит поле на N ячеек, так что бы в одну влезал один юнит данного типа.
             //Юниты заполняют рандомные клетки, если их не максимально количество
@@ -52,7 +52,7 @@ namespace Fighter.src
 
         public string GetFieldState()
         {
-            string state = ( "Живые: " + liveCount + " Мертвые:" + deadCount );
+            string state = ( "Живые: " + aliveCount + " Мертвые:" + deadCount );
             return state;
         }
 
@@ -60,9 +60,9 @@ namespace Fighter.src
         {
             string state = "";
             for (int i = 0; i < count; i++) {
-                if (units[i] != null)
+                if (Units[i] != null)
                 {
-                    state +=  units[i].hp + " ";
+                    state +=  Units[i].hp + " ";
                 }
                 else
                 {
@@ -76,29 +76,29 @@ namespace Fighter.src
         public void LongRangeExposure(int shellCount, int shellDamage) {
             Random rnd = new Random();
             for (int i = 0; i < shellCount; i++) {
-                int unitPos = rnd.Next(1, size / dimensions); //Рандомиться ячейка в которую попадет стрела (если 0, то стрела не попала не куда)
+                int unitPos = rnd.Next(1, size / Dimensions); //Рандомиться ячейка в которую попадет стрела (если 0, то стрела не попала не куда)
                 if (unitPos < count)
                 {
-                    if (units[unitPos] != null)
+                    if (Units[unitPos] != null)
                     {
-                        units[unitPos].DealingDamage(shellDamage);
+                        Units[unitPos].DealingDamage(shellDamage);
                     }
                 }
             }
         }
 
-        public void DirectExposure(AbstractField atackDilers) {
+        public void DirectExposure(AbstractArea attackDealers) {
             Random rnd = new Random();
-            for (int i = 0; i < (((size / 5) > liveCount) ? liveCount : (size / 5)) /*береться 20% юнитов от макс кол-ва, если юнитов меньеше беруться все*/; i++)
+            for (int i = 0; i < (((size / 5) > aliveCount) ? aliveCount : (size / 5)) /*береться 20% юнитов от макс кол-ва, если юнитов меньеше беруться все*/; i++)
             {
                 int a = rnd.Next(1, 4);
                 if (a == 1)
                 {
-                    atackDilers.units[i].DealingDamage(this.damagePerUnit);
+                    attackDealers.Units[i].DealingDamage(this.damagePerUnit);
                 }
                 else if (a == 2)
                 {
-                    this.units[i].DealingDamage(atackDilers.damagePerUnit);
+                    this.Units[i].DealingDamage(attackDealers.damagePerUnit);
                 }
             }
             //20% от Макс защищающихся сталкиваться 20% от макс защищающихся
@@ -107,9 +107,9 @@ namespace Fighter.src
 
         public void UnitDeath (int id)
         {
-            units[id] = null;
+            Units[id] = null;
             deadCount++;
-            if(--liveCount == 0)
+            if(--aliveCount == 0)
             {
                 mapController.RemoveField(teamId, position);
             }
@@ -122,17 +122,17 @@ namespace Fighter.src
 
         public string GetType()
         {
-            return typeName;
+            return TypeName;
         }
     }
 
-    class Hybrid : AbstractField {
-        override public List<int> SelectedAlgorithm() {
+    class Hybrid : AbstractArea {
+        public override List<int> SelectedAlgorithm() {
             List<int> var = null;
             return var;
         }
 
-        public override void Atack(int atackedFieldId)
+        public override void Attack(int attackedFieldId)
         {
             throw new NotImplementedException();
         }

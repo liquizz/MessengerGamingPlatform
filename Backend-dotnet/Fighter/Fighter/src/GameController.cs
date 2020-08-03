@@ -100,6 +100,7 @@ namespace Fighter.src
         }
 
         public List<int> GetAvailableField(int team) //Показывает свободные ячеки указанной команды (для стадии выбора)
+        // !нужно кардинально переработать!
         {
             List<int> ids = new List<int>();
             for (int i = 0; i < 8; i++)
