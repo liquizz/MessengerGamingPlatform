@@ -28,11 +28,11 @@ namespace Database.WriteServices.MedievalBattle
             return true;
         }
 
-        public bool UpdateCoin(int value, int team)
+        public bool UpdateCoin(int teamId, int value)
         {
             var coin = new Coin()
             {
-                TeamId = team,
+                TeamId = teamId,
                 Value = value
             };
 
@@ -61,24 +61,32 @@ namespace Database.WriteServices.MedievalBattle
             throw new System.NotImplementedException();
         }
 
-        public bool CreateUnitArcher(int team, int unitCount, int classId, int areaId, int unitCost)
+        public bool CreateUnit(int areaId, string unitType, int unitCount, int teamId, int positionId, GameController controller, List<AbstractField> enemiesFields)
         {
-            var unit = new List<Unit>(); // Is this rly empty?
+            // Testing required
+            // var unit = new List<Unit>(); // Is this rly empty?
+            var area = _context.AbstractFields.Find(areaId);
 
-            var area =  new AbstractField()
+            if (area != null)
             {
-                TeamId = team,
-                FieldUnitCount = unitCount,
-                TypeName = "Archer",
-                HpPerUnit = 100,
-                DamagePerUnit = 10,
-                FieldArmor = 0,
-                UnitSize = 1,
-                Units = unit,
-            };
-             
+                area.TeamId = teamId;
+                area.FieldUnitCount = unitCount;
+                area.TypeName = unitType;
+                area.HpPerUnit = 100;
+                area.DamagePerUnit = 10;
+                area.FieldArmor = 0;
+                area.UnitSize = 1;
+                area.Enemies = enemiesFields;
+                area.GameController = controller;
+                area.PositionId = positionId;
+                // Units = unit,
 
-            throw new System.NotImplementedException();
+                _context.SaveChanges();
+
+                return true;
+            }
+
+            return false;
         }
     }
 }

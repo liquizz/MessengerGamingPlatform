@@ -1,4 +1,7 @@
-﻿namespace Database.WriteServices.MedievalBattle.Interfaces
+﻿using System.Collections.Generic;
+using Database.Models.MedievalBattleModels;
+
+namespace Database.WriteServices.MedievalBattle.Interfaces
 {
     public interface IGameControllerRepository
     {
@@ -7,6 +10,6 @@
         public bool DeleteCoin(int teamId);
         public bool CreateGameController(); // Initializes game (creates required fields in DB)
         public bool AreaUpdate();
-        public bool CreateUnitArcher(int team, int unitCount, int classId, int areaId, int unitCost);
+        public bool CreateUnit(int areaId, string unitType, int unitCount, int teamId, int positionId, GameController controller, List<AbstractField> enemiesFields);
     }
 }

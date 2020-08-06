@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using Database.DTO.MedievalBattleDTO;
+using Database.Models.MedievalBattleModels;
 
 namespace Database.ReadServices.MedievalBattle
 {
     public interface IAreaQueries
     {
-        public object GetAreaByAreaId(int areaId);
+        public AbstractField GetAreaByAreaId(int areaId);
         public List<GetAreaByUserIdDTO> GetAreasByUserId(int userId);
         public object GetAreaState(int userId);
 

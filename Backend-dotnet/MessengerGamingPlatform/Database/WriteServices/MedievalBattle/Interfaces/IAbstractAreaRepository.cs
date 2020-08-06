@@ -7,7 +7,7 @@ namespace Database.WriteServices.MedievalBattle.Interfaces
         public bool CreateAbstractArea();
         public bool UpdateAbstractAreaCounters(int abstractAreaId, int aliveCount, int deadCount);
         public bool DeleteAbstractArea();
-        public bool CreateUnit();
+        public bool CreateUnit(Unit unit);
         public bool UpdateUnit(int unitId, int hpPerUnit, int damagePerUnit, int armor, AbstractField abstractAreaId);
         public bool DeleteUnit();
     }

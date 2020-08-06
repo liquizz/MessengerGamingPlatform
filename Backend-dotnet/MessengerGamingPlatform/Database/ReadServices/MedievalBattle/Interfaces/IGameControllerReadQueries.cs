@@ -1,9 +1,12 @@
-﻿namespace Database.ReadServices.MedievalBattle
+﻿using System.Collections.Generic;
+using Database.DTO.MedievalBattleDTO;
+
+namespace Database.ReadServices.MedievalBattle
 {
     public interface IGameControllerReadQueries
     {
         public object GetTeamsCount(int sessionId); // Count of records in UsersSessions table
-        public object GetCoins();
+        public GetCoinsDTO GetCoins(int gameControllerId, int teamId);
         public object GetTurn(); // Is now your turn? OR Turn counter
         public object GetAvailableAreasCount(int userId);
         public object GetDefeatTeam(int gameControllerId); // Outputs defeated team id (userId)

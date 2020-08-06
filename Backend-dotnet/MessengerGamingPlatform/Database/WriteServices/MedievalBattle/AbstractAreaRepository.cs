@@ -1,4 +1,5 @@
-﻿using Database.Models;
+﻿using System.Collections.Generic;
+using Database.Models;
 using Database.Models.MedievalBattleModels;
 using Database.WriteServices.MedievalBattle.Interfaces;
 
@@ -18,7 +19,7 @@ namespace Database.WriteServices.MedievalBattle
             throw new System.NotImplementedException();
         }
 
-        public bool CreateUnit()
+        public bool CreateUnit(Unit unit)
         {
             throw new System.NotImplementedException();
         }

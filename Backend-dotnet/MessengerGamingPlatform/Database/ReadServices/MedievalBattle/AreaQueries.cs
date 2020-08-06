@@ -5,6 +5,7 @@ using Dapper;
 using Database.DTO;
 using Database.DTO.MedievalBattleDTO;
 using Database.Helpers.Sql;
+using Database.Models.MedievalBattleModels;
 using Database.ReadServices.MedievalBattle;
 using Microsoft.Data.SqlClient;
 
@@ -18,7 +19,7 @@ namespace Database.ReadServices.MedievalBattle
             _connectionString = helper.ConnectionString;
         }
 
-        public object GetAreasByAreaId(int areaId)
+        public AbstractField GetAreaByAreaId(int areaId)
         {
             throw new System.NotImplementedException();
         }

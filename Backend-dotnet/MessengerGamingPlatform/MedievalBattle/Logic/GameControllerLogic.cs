@@ -1,4 +1,6 @@
-﻿using Database.Models.MedievalBattleModels;
+﻿using System.Collections.Generic;
+using Database.DTO.MedievalBattleDTO;
+using Database.Models.MedievalBattleModels;
 
 namespace MedievalBattle.Logic
 {
@@ -7,38 +9,63 @@ namespace MedievalBattle.Logic
         // TODO: Implement write/read actions to this section
 
         // REQUIRED DATA: READ List<Coins> coins, WRITE List<AbstractField> Teams
-        //public bool SetField(int team, int count, int classId, int fieldId, int unitCost) //Заполняет ячейку операясь на данные возвращенные ботом
-        //{
+        public SetAreaDTO SetArea(int teamId, int unitCount, int classId, int areaId, int unitCost, GetCoinsDTO coins, GameController controller, List<AbstractField> enemyTeams) //Заполняет ячейку операясь на данные возвращенные ботом
+        {
+            var dto = new SetAreaDTO()
+            {
+                CoinsValue = coins.Value
+            };
 
-        //    switch (classId)
-        //    {
-        //        case 0:
+            switch (classId)
+            {
+                case 0:
 
-        //            if (coins[team] < unitCost * count)
-        //            {
-        //                return false;
-        //            }
-        //            else
-        //            {
-        //                coins[team] -= unitCost * count;
-        //                Teams[team][fieldId] = new Archer(count, team, fieldId, Teams[(team == 1) ? 0 : 1 /*это вражеская команда*/], this);
-        //                return true;
-        //            }
-        //        case 1:
-        //            if (coins[team] < unitCost * count)
-        //            {
-        //                return false;
-        //            }
-        //            else
-        //            {
-        //                coins[team] -= unitCost * count;
-        //                Teams[team][fieldId] = new Warrior(count, team, fieldId, Teams[(team == 1) ? 0 : 1 /*это вражеская команда*/], this);
-        //                return true;
-        //            }
+                    if (dto.CoinsValue < unitCost * unitCount)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        var unitArcher = new Archer()
+                        {
+                            AbstractFieldId = areaId,
+                            FieldUnitCount = unitCount,
+                            Enemies = enemyTeams,
+                            GameController = controller
+                            // count, team, areaId, Teams[(team == 1) ? 0 : 1 /*это вражеская команда*/], this
+                        };
 
-        //    }
-        //    return false;
-        //}
+                        dto.CoinsValue -= unitCost * unitCount;
+                        dto.UnitType = "Archer";
+                        dto.Units.Add(unitArcher);
+                        return dto;
+                    }
+                case 1:
+                    if (dto.CoinsValue < unitCost * unitCount)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        var unitWarrior = new Fighter()
+                        {
+                            AbstractFieldId = areaId,
+                            FieldUnitCount = unitCount,
+                            Enemies = enemyTeams,
+                            GameController = controller
+                        };
+
+                        dto.CoinsValue -= unitCost * unitCount;
+                        dto.UnitType = "Warrior";
+                        dto.Units.Add(unitWarrior);
+
+
+                        // Teams[team][areaId] = new Warrior(count, team, areaId, Teams[(team == 1) ? 0 : 1 /*это вражеская команда*/], this);
+                        return dto;
+                    }
+                default: return null;
+            }
+        }
 
 
         // GetMapState will be implemented in read-action form

@@ -23,16 +23,17 @@ namespace Database.ReadServices.MedievalBattle
         }
 
         // TODO: Fix coins in model
-        public object GetCoins()
+        public GetCoinsDTO GetCoins(int gameControllerId, int teamId)
         {
-            var sqlquery = $@"select distinct Coins.Value
+            var sqlquery = $@"select distinct Coins.Value, Coins.TeamId, Coins.GameControllerId
                                     from Coins
+                                    join GameControllers on GameControllers.GameControllerId = Coins.GameControllerId
                                     join AbstractFields on AbstractFields.TeamId = Coins.TeamId
-                                    ";
+                                    where Coins.GameControllerId = {gameControllerId} and Coins.TeamId = {teamId};";
 
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                return db.Query<GetCoinsDTO>(sqlquery).ToList();
+                return db.Query<GetCoinsDTO>(sqlquery).FirstOrDefault();
             }
         }
 

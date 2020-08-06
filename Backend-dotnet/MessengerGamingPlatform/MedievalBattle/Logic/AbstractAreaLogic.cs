@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Database.DTO.MedievalBattleDTO;
 using Database.Models.MedievalBattleModels;
 
-
 namespace MedievalBattle.Logic
 {
     public class AbstractAreaLogic

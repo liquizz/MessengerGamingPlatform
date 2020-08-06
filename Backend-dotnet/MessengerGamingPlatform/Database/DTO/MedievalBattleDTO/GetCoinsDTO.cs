@@ -4,5 +4,6 @@
     {
         public int TeamId { get; set; }
         public int Value { get; set; }
+        public int GameControllerId { get; set; }
     }
 }
