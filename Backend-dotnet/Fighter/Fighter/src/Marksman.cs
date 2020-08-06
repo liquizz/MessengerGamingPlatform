@@ -6,7 +6,7 @@ namespace Fighter.src
 {
     class Marksman : AbstractArea //Класс дальников
     {
-        override public List<int> SelectedAlgorithm() //Метод возвращающий доступные для атаки вражеские ячейки (точнее их id), нужен для того что бы бот создавал клавиатуру из этих значений
+        public override List<int> SelectedAlgorithm() //Метод возвращающий доступные для атаки вражеские ячейки (точнее их id), нужен для того что бы бот создавал клавиатуру из этих значений
         {
             List<int> var = new List<int>();
             for (int id = 0; id < 8; id++) 

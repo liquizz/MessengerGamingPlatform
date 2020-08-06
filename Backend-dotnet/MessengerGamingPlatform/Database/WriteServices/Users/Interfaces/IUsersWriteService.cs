@@ -1,6 +1,6 @@
 ﻿namespace Database.WriteServices.Users.Interfaces
 {
-    public interface IUsersService
+    public interface IUsersWriteService
     {
         
     }

@@ -8,6 +8,7 @@ namespace Database.Models.MedievalBattleModels
 {
     public class Unit
     {
+
         [Key]
         public int UnitId { get; set; }
         public int Hp { get; set; }

@@ -4,14 +4,16 @@ using Database.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Api.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20200805052325_AddedTeamIdFieldToCoinTable")]
+    partial class AddedTeamIdFieldToCoinTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -71,9 +73,6 @@ namespace Api.Migrations
 
                     b.Property<int>("TeamId")
                         .HasColumnType("int");
-
-                    b.Property<string>("TypeName")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("UnitCost")
                         .HasColumnType("int");

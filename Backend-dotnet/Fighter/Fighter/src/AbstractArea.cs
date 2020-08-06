@@ -73,7 +73,7 @@ namespace Fighter.src
             return state;
         }
 
-        public void LongRangeExposure(int shellCount, int shellDamage) {
+        public void LongRangeExposure(int shellCount, int shellDamage) { // Amount of archers and damage per 1 archer
             Random rnd = new Random();
             for (int i = 0; i < shellCount; i++) {
                 int unitPos = rnd.Next(1, size / Dimensions); //Рандомиться ячейка в которую попадет стрела (если 0, то стрела не попала не куда)
@@ -81,7 +81,7 @@ namespace Fighter.src
                 {
                     if (Units[unitPos] != null)
                     {
-                        Units[unitPos].DealingDamage(shellDamage);
+                        Units[unitPos].DoDamage(shellDamage);
                     }
                 }
             }
@@ -94,11 +94,11 @@ namespace Fighter.src
                 int a = rnd.Next(1, 4);
                 if (a == 1)
                 {
-                    attackDealers.Units[i].DealingDamage(this.damagePerUnit);
+                    attackDealers.Units[i].DoDamage(this.damagePerUnit);
                 }
                 else if (a == 2)
                 {
-                    this.Units[i].DealingDamage(attackDealers.damagePerUnit);
+                    this.Units[i].DoDamage(attackDealers.damagePerUnit);
                 }
             }
             //20% от Макс защищающихся сталкиваться 20% от макс защищающихся

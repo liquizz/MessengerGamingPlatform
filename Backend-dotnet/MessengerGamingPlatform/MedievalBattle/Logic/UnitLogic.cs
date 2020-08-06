@@ -21,6 +21,8 @@ namespace MedievalBattle.Logic
             {
                 RemoveUnit(unit);
             }
+
+            // WriteService.UpdateUnit(unit)
         }
 
         private static void RemoveUnit(Unit unit) // TODO: We may mark unit as dead, instead of deleting him

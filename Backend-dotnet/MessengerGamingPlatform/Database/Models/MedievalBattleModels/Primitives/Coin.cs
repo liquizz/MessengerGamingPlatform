@@ -11,5 +11,6 @@ namespace Database.Models.MedievalBattleModels
         [Key]
         public int CoinId { get; set; }
         public int Value { get; set; }
+        public int TeamId { get; set; } 
     }
 }

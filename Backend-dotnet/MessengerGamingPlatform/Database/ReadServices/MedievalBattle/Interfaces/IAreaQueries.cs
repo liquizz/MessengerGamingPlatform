@@ -5,7 +5,7 @@ namespace Database.ReadServices.MedievalBattle
 {
     public interface IAreaQueries
     {
-        public object GetAreasByAreaId(int areaId);
+        public object GetAreaByAreaId(int areaId);
         public List<GetAreaByUserIdDTO> GetAreasByUserId(int userId);
         public object GetAreaState(int userId);
 

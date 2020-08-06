@@ -1,12 +1,13 @@
-﻿using Database.WriteServices.MedievalBattle.Interfaces;
+﻿using Database.Models.MedievalBattleModels;
+using Database.WriteServices.MedievalBattle.Interfaces;
 using Database.ReadServices.MedievalBattle;
 
 namespace Database.WriteServices.MedievalBattle
 {
-    public class AreaWriteService : IAreaWriteService
+    public class AbstractAreaWriteService : IAbstractAreaWriteService
     {
         private readonly IAreaQueries _queries;
-        public AreaWriteService(IAreaQueries queries)
+        public AbstractAreaWriteService(IAreaQueries queries)
         {
             _queries = queries;
         }

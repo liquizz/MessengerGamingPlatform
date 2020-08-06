@@ -46,10 +46,14 @@ namespace Database.ReadServices.MedievalBattle
                                   WHERE [dbo].[AbstractFields].[TeamId] = {userId};";
             // TODO: Rename dbo.AbstractFields -> dbo.AbstractAreas, TeamId -> UserId (more relevant)
 
+            var result = new List<GetAreaByUserIdDTO>();
+
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
-                return db.Query<List<GetAreaByUserIdDTO>>(sqlquery).FirstOrDefault();
+                result = db.Query<GetAreaByUserIdDTO>(sqlquery).ToList();
             }
+
+            return result;
         }
 
         public object GetAreaSize(int areaId)

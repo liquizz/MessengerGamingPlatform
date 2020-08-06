@@ -1,11 +1,14 @@
-﻿using Database.ReadServices.MedievalBattle;
+﻿using Database.Models.MedievalBattleModels;
+using Database.ReadServices.MedievalBattle;
 using Database.WriteServices.MedievalBattle.Interfaces;
+using System.Collections.Generic;
 
 namespace Database.WriteServices.MedievalBattle
 {
     public class GameControllerWriteService : IGameControllerWriteService
     {
         private readonly IGameControllerReadQueries _queries;
+
         public GameControllerWriteService(IGameControllerReadQueries queries)
         {
             _queries = queries;
@@ -16,7 +19,7 @@ namespace Database.WriteServices.MedievalBattle
             throw new System.NotImplementedException();
         }
 
-        public bool CreateGameController()
+        public bool CreateArcherUnit(int count, int teamId, int position, List<AbstractField> enemy, GameController mapController)
         {
             throw new System.NotImplementedException();
         }
