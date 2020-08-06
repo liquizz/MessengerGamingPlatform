@@ -3,6 +3,7 @@ using Database.DTO.MedievalBattleDTO;
 using Database.Models.MedievalBattleModels;
 using Database.ReadServices.MedievalBattle;
 using Database.WriteServices.MedievalBattle.Interfaces;
+using MedievalBattle.Logic;
 using MedievalBattle.Services.Interfaces;
 
 namespace MedievalBattle.Services
@@ -34,9 +35,26 @@ namespace MedievalBattle.Services
             return _repository.CreateUnit(areaId, unitType, unitCount, teamId, positionId, controller, enemiesFields);
         }
 
-        public object GetEnemyUserId()
+        public GetEnemyTeamIdDTO GetEnemyTeamId(int teamId, int gameControllerId)
         {
-            return null;
+            return _queries.GetEnemyTeamId(teamId, gameControllerId);
+        }
+
+        public object SetArea(int teamId, int unitCount, int classId, int areaId, int unitCost)
+        {
+            var logic = new GameControllerLogic();
+            var gameControllerId = _queries.GetGameControllerId(teamId).GameControllerId;
+            var gameController = _queries.GetGameController(gameControllerId); // redundant using of queries
+            var coins = GetCoins(gameControllerId, teamId);
+            var enemyAreas = _queries.GetEnemyAreas(teamId, gameControllerId);
+
+            var setAreaResult = logic.SetArea(teamId, unitCount, classId, areaId, unitCost, coins, gameController,
+                enemyAreas);
+
+            _repository.UpdateCoin(teamId, setAreaResult.CoinsValue);
+            _repository.AreaUpdate(areaId, setAreaResult); 
+            // TODO: Think about merging AreaUpdate and UpdateCoin methods
+            return true;
         }
     }
 }

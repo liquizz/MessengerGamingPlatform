@@ -9,7 +9,9 @@ namespace MedievalBattle.Logic
         // TODO: Implement write/read actions to this section
 
         // REQUIRED DATA: READ List<Coins> coins, WRITE List<AbstractField> Teams
-        public SetAreaDTO SetArea(int teamId, int unitCount, int classId, int areaId, int unitCost, GetCoinsDTO coins, GameController controller, List<AbstractField> enemyTeams) //Заполняет ячейку операясь на данные возвращенные ботом
+        public SetAreaDTO SetArea(int teamId, int unitCount, int classId, int areaId, int unitCost,
+            GetCoinsDTO coins, GameController controller, List<AbstractField> enemyTeams) 
+            //Заполняет ячейку операясь на данные возвращенные ботом
         {
             var dto = new SetAreaDTO()
             {

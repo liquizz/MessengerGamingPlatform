@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Database.DTO.MedievalBattleDTO;
+using Database.Models.MedievalBattleModels;
 
 namespace Database.ReadServices.MedievalBattle
 {
@@ -12,5 +13,9 @@ namespace Database.ReadServices.MedievalBattle
         public object GetDefeatTeam(int gameControllerId); // Outputs defeated team id (userId)
         public object GetGameAvailable(int gameControllerId); // Availability of the game (is the game ended? yes: false, no: true)
         public object GetAreas(int areaId); // Get list of areas that matches userId
+        public GetEnemyTeamIdDTO GetEnemyTeamId(int teamId, int gameControllerId);
+        public GetGameControllerIdDTO GetGameControllerId(int teamId);
+        public GameController GetGameController(int gameControllerId);
+        public List<AbstractField> GetEnemyAreas(int teamId, int gameControllerId);
     }
 }

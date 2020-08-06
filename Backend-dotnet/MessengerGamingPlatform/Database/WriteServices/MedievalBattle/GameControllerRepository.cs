@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Database.DTO.MedievalBattleDTO;
 using Database.Models;
 using Database.Models.MedievalBattleModels;
 using Database.WriteServices.MedievalBattle.Interfaces;
@@ -56,9 +57,25 @@ namespace Database.WriteServices.MedievalBattle
             throw new System.NotImplementedException();
         }
 
-        public bool AreaUpdate()
+        public bool AreaUpdate(int areaId, SetAreaDTO unitField)
         {
-            throw new System.NotImplementedException();
+            var area = _context.AbstractFields.Find(areaId);
+
+            if (area != null)
+            {
+                area.TypeName = unitField.UnitType;
+
+                foreach (var enemyArea in unitField.Units)
+                {
+                    area.Enemies.Add(enemyArea);
+                }
+
+                _context.SaveChanges();
+
+                return true;
+            }
+
+            return false;
         }
 
         public bool CreateUnit(int areaId, string unitType, int unitCount, int teamId, int positionId, GameController controller, List<AbstractField> enemiesFields)

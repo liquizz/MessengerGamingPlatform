@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using Dapper;
 using Database.DTO.MedievalBattleDTO;
+using Database.Models.MedievalBattleModels;
 using Microsoft.Data.SqlClient;
 
 namespace Database.ReadServices.MedievalBattle
@@ -84,6 +85,59 @@ namespace Database.ReadServices.MedievalBattle
             using (IDbConnection db = new SqlConnection(_connectionString))
             {
                 return db.Query<GetCoinsDTO>(sqlquery).ToList();
+            }
+        }
+
+        public GetEnemyTeamIdDTO GetEnemyTeamId(int teamId, int gameControllerId)
+        {
+            var sqlquery = $@"select distinct AbstractFields.TeamId
+                                    from AbstractFields
+                                    join GameControllers on GameControllers.GameControllerId = AbstractFields.GameControllerId
+                                    where GameControllers.GameControllerId = {gameControllerId}
+                                    except
+                                    select distinct AbstractFields.TeamId
+                                    from AbstractFields
+                                    join GameControllers on GameControllers.GameControllerId = AbstractFields.GameControllerId
+                                    where AbstractFields.TeamId = {teamId} and GameControllers.GameControllerId = {gameControllerId}";
+            using (IDbConnection db = new SqlConnection(_connectionString))
+            {
+                return db.Query<GetEnemyTeamIdDTO>(sqlquery).FirstOrDefault();
+            }
+        }
+
+        public GetGameControllerIdDTO GetGameControllerId(int teamId)
+        {
+            var sqlquery = $@"select distinct *
+                                    from AbstractFields
+                                    join GameControllers on GameControllers.GameControllerId = AbstractFields.GameControllerId
+                                    where AbstractFields.TeamId = {teamId}";
+            using (IDbConnection db = new SqlConnection(_connectionString))
+            {
+                return db.Query<GetGameControllerIdDTO>(sqlquery).FirstOrDefault();
+            }
+        }
+
+        public GameController GetGameController(int gameControllerId)
+        {
+            var sqlquery = $@"select *
+                                    from GameControllers
+                                    where GameControllers.GameControllerId = {gameControllerId};";
+            using (IDbConnection db = new SqlConnection(_connectionString))
+            {
+                return db.Query<GameController>(sqlquery).FirstOrDefault();
+            }
+        }
+
+        public List<AbstractField> GetEnemyAreas(int teamId, int gameControllerId)
+        {
+            var enemyTeamId = GetEnemyTeamId(teamId, gameControllerId).TeamId;
+
+            var sqlquery = $@"select *
+                                    from AbstractFields
+                                    where AbstractFields.TeamId = {enemyTeamId};";
+            using (IDbConnection db = new SqlConnection(_connectionString))
+            {
+                return db.Query<AbstractField>(sqlquery).ToList();
             }
         }
     }
