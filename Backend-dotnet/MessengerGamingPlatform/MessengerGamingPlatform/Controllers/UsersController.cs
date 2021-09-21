@@ -4,12 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Database.Models;
-using Database.DTO;
-using Database.ReadServices.Users;
-using Database.ReadServices.Users.Interfaces;
+using Component.Database.Models;
+using Component.Database.DTO;
+using Component.Database.ReadServices.Users;
+using Component.Database.ReadServices.Users.Interfaces;
 
-namespace Api.Controllers
+namespace Component.Web.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]

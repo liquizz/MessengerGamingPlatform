@@ -1,19 +1,19 @@
 ﻿using Autofac;
-using Database.Helpers.Sql;
-using Database.ReadServices.MedievalBattle;
+using Component.Database.Helpers.Sql;
+using Component.Database.ReadServices.MedievalBattle;
 using Microsoft.Extensions.Configuration;
-using Database.ReadServices.Sessions;
-using Database.ReadServices.Sessions.Interfaces;
-using Database.ReadServices.Users;
-using Database.ReadServices.Users.Interfaces;
-using Database.WriteServices.MedievalBattle.Interfaces;
-using Database.WriteServices.MedievalBattle;
-using Database.WriteServices.Sessions;
-using Database.WriteServices.Sessions.Interfaces;
-using Database.WriteServices.Users;
-using Database.WriteServices.Users.Interfaces;
+using Component.Database.ReadServices.Sessions;
+using Component.Database.ReadServices.Sessions.Interfaces;
+using Component.Database.ReadServices.Users;
+using Component.Database.ReadServices.Users.Interfaces;
+using Component.Database.WriteServices.MedievalBattle.Interfaces;
+using Component.Database.WriteServices.MedievalBattle;
+using Component.Database.WriteServices.Sessions;
+using Component.Database.WriteServices.Sessions.Interfaces;
+using Component.Database.WriteServices.Users;
+using Component.Database.WriteServices.Users.Interfaces;
 
-namespace Api.Config
+namespace Component.Web.Config
 {
     public class MGPAutofacConfig : Module
     {

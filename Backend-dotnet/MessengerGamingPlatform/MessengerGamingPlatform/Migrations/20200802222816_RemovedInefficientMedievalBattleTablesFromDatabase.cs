@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Api.Migrations
+namespace Component.Web.Migrations
 {
     public partial class RemovedInefficientMedievalBattleTablesFromDatabase : Migration
     {

@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api", "MessengerGamingPlatform\Api.csproj", "{30A6F32F-17DF-459E-8A0E-A448C9A438C7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Component.Web", "MessengerGamingPlatform\Component.Web.csproj", "{30A6F32F-17DF-459E-8A0E-A448C9A438C7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Database", "Database\Database.csproj", "{A5A95D38-68D7-4EC9-B770-4C41831143A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Component.Database", "Component.Database\Component.Database.csproj", "{A5A95D38-68D7-4EC9-B770-4C41831143A6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedievalBattle", "MedievalBattle\MedievalBattle.csproj", "{A3255C6D-60A8-4AFA-9555-F81FF6FBA571}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Component.Games", "Component.Games", "{3551FC64-036C-45C0-B722-5BC873BC76BE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,5 +35,8 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B7C2EAD7-CA73-463F-BE7C-BA8A474EA62F}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A3255C6D-60A8-4AFA-9555-F81FF6FBA571} = {3551FC64-036C-45C0-B722-5BC873BC76BE}
 	EndGlobalSection
 EndGlobal

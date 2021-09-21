@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Api.Config;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -11,12 +10,13 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
-using Database.Models;
+using Component.Database.Models;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using Component.Web.Config;
 using Microsoft.AspNetCore.HttpOverrides;
 
-namespace Api
+namespace Component.Web
 {
     public class Startup
     {
@@ -58,7 +58,7 @@ namespace Api
             services.AddDbContext<DatabaseContext>(i =>
                 i.UseSqlServer(
                     Configuration.GetConnectionString("server1"), b =>
-                        b.MigrationsAssembly("Api")));
+                        b.MigrationsAssembly("Component.Web")));
             //services.AddScoped<DatabaseContext>();
         }
 

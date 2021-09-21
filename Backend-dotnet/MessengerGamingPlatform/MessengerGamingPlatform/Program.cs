@@ -8,9 +8,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
-using Api.Config;
+using Component.Web.Config;
 
-namespace Api
+namespace Component.Web
 {
     public class Program
     {
